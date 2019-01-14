@@ -3,7 +3,7 @@ import { Box, Image } from 'bulma-styled-components'
 
 type Props = {
   digimon: {
-    digimon: string,
+    name: string,
     image: string,
   },
   onClick?: () => any
@@ -36,7 +36,7 @@ export class DigimonCard extends PureComponent<Props> {
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',
               }} className="has-text-white has-text-centered is-size-7" >
-              {digimon.digimon}
+              {digimon.name}
             </div>
           </Image>
         </Box>

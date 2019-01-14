@@ -1,5 +1,3 @@
-import { db } from './'
-
 export class Digimon {
   id: number;
   name: string;
@@ -10,25 +8,12 @@ export class Digimon {
   equip_slots: number;
   image: string;
   support_skill_id: number;
-
-  constructor() {
-    Object.defineProperties(this, {
-      _stats: {value: [], enumerable: false, writable: true },
-      _moves: {value: [], enumerable: false, writable: true },
-      _digivolveTo: {value: [], enumerable: false, writable: true },
-    });
-  }
-
-  async moves() {
-    const movelearns = await db.movelearn.where('digimon_id').equals(this.id).toArray()
-    return "db.moves.where('id')"
-  }
-
+  stats: {
+    [level: string]: IStats
+  };
 }
 
 export interface IStats {
-  digimon_id: number,
-  level: number,
   hp: number,
   sp: number,
   atk: number,
@@ -37,21 +22,21 @@ export interface IStats {
   spd: number
 }
 
-export interface IMove {
-  id: number,
-  name: string,
-  sp_cost: number,
-  type: string,
-  power: number,
-  attribute: string,
-  inheritable: string,
-  description: string
+export class Move {
+  id: number;
+  name: string;
+  sp_cost: number;
+  type: string;
+  power: number;
+  attribute: string;
+  inheritable: string;
+  description: string;
 }
 
-export interface ISupport {
-  id: number,
-  name: string,
-  description: string
+export class Support {
+  id: number;
+  name: string;
+  description: string;
 }
 
 export interface IMoveLearn {
