@@ -6,7 +6,8 @@ type Props = {
     name: string,
     image: string,
   },
-  onClick?: () => any
+  onClick?: () => any,
+  href?: string
 }
 
 export class DigimonCard extends PureComponent<Props> {
@@ -17,14 +18,10 @@ export class DigimonCard extends PureComponent<Props> {
     }
   }
   render() {
-    const { digimon } = this.props
+    const { digimon, onClick, href } = this.props
     return  (
-      <Box
-        as="a"
-        style={{ minWidth: 100, maxWidth: 120, padding: 10, margin: 5 }}
-      >
-        <Box className="is-paddingless has-background-grey-lighter">
-          <Image className="is-square">
+        <Box as={(onClick || href) && "a"} className="is-paddingless has-background-grey-lighter is-clipped" style={{margin: 5}} onClick={onClick}>
+          <Image className="is-96x96">
             <img src={digimon.image} alt="digimon"/>
             <div style={{
                 position: 'absolute',
@@ -40,7 +37,6 @@ export class DigimonCard extends PureComponent<Props> {
             </div>
           </Image>
         </Box>
-      </Box>
     )
   }
 }
