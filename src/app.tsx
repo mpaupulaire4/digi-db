@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BulmaStyledTheme, Container, Section, Navbar } from 'bulma-styled-components'
+import { DigimonCard } from './components/DigimonCard'
+import data from './data.json'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <BulmaStyledTheme>
+        <div className="has-navbar-fixed-top">
+          <Navbar className="is-fixed-top is-primary">
+            asd
+          </Navbar>
+          <Section className="has-background-grey is-fullheight">
+            <Container>
+              <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
+              {data.digimon.map((digimon) => (
+                <DigimonCard
+                  key={digimon.id}
+                  digimon={digimon}
+                />
+              ))}
+              </div>
+            </Container>
+          </Section>
+        </div>
+      </BulmaStyledTheme>
     );
   }
 }

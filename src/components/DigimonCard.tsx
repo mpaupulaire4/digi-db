@@ -19,7 +19,10 @@ export class DigimonCard extends PureComponent<Props> {
   render() {
     const { digimon } = this.props
     return  (
-      <Box style={{ minWidth: 100, maxWidth: 120, padding: 10, margin: 5 }}  >
+      <Box
+        as="a"
+        style={{ minWidth: 100, maxWidth: 120, padding: 10, margin: 5 }}
+      >
         <Box className="is-paddingless has-background-grey-lighter">
           <Image className="is-square">
             <img src={digimon.image} alt="digimon"/>
