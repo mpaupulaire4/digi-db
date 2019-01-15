@@ -8,7 +8,7 @@ type Props = {
   },
   onClick?: () => any,
   size?: 16 | 24 | 32 | 48 | 64 | 96 | 128,
-  href?: string,
+  link?: boolean
   nameless?: boolean
 }
 
@@ -17,9 +17,9 @@ export class DigimonCard extends PureComponent<Props> {
     size: 96
   }
   render() {
-    const { digimon, onClick, href, size, nameless } = this.props
+    const { digimon, onClick, link, size, nameless } = this.props
     return  (
-        <Box as={(onClick || href) && "a"} className="is-paddingless has-background-grey-lighter is-clipped" style={{margin: 5, maxWidth: size }} onClick={onClick}>
+        <Box as={link ? "a" : undefined} className="is-paddingless has-background-grey-lighter is-clipped" style={{margin: 5, maxWidth: size }} onClick={onClick}>
           <Image className={`is-${size}x${size}`}>
             <img src={digimon.image} alt="digimon"/>
             {!nameless && (
