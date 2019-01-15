@@ -48,7 +48,7 @@ export class Digimon {
       db.supports.get(this.support_skill_id),
       db.digivolve.where('from').equals(this.id).toArray(),
       db.digivolve.where('to').equals(this.id).toArray(),
-      db.movelearn.where('digimon_id').equals(this.id).toArray(),
+      db.movelearn.where('digimon_id').equals(this.id).sortBy('level'),
     ])
     this.supportSkill = support_skill
 
@@ -62,14 +62,14 @@ export class Digimon {
       db.digimon.where('id').anyOf(digivolveFromData.map(({ from }) => from)).toArray(),
     ])
 
-    const moveMap = movelearns.reduce((map, movelearn) => {
-      map[movelearn.move_id] = movelearn.level
+    const moveMap = moves.reduce((map, move) => {
+      map[move.id] = move
       return map
-    }, {} as { [move_id: string]: number })
-    this.moves = moves.map((move) => {
+    }, {} as { [move_id: string]: Move })
+    this.moves = movelearns.map((movelearn) => {
       return {
-        move,
-        level: moveMap[move.id]
+        move: moveMap[movelearn.move_id],
+        level: movelearn.level
       }
     })
 
@@ -104,13 +104,6 @@ export class Digimon {
         digimon: digi
       }
     })
-
-
-    // this.digivolveTo = digivolveTo.map((digi) => {
-    //   return {
-    //     digimon: digi
-    //   }
-    // })
 
   }
 }
