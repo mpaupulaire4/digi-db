@@ -67,7 +67,7 @@ export class Digimon extends Component<Props,State> {
                     <br/>
                     <strong>Memory: </strong> {digimon.memory}
                     <br/>
-                    <strong>Eq. Slots: </strong> {digimon.equip_slots}
+                    <strong>Slots: </strong> {digimon.slots}
                   </p>
                 </Content>
               </Media.Content>

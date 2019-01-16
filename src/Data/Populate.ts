@@ -6,7 +6,7 @@ export function populate(db: Database) {
   db.on('populate', () => {
     console.log('populating')
     try {
-      db.digimon.bulkPut(Object.values(data.digimon).map((digi) => new Digimon(digi)))
+      db.digimon.bulkPut(data.digimon.map((digi) => new Digimon(digi)))
       db.moves.bulkPut(data.moves)
       db.supports.bulkPut(data.supports)
       db.movelearn.bulkPut(data.movelearn)
@@ -14,5 +14,6 @@ export function populate(db: Database) {
     } catch (e) {
       console.log(e)
     }
+    console.log('population done')
   })
 }

@@ -8,8 +8,9 @@ export interface IDigimon {
   type: string;
   attribute: string;
   memory: number;
-  equip_slots: number;
+  slots: number;
   image: string;
+  sprite: string;
   support_skill_id: number;
   stats: {
     [level: string]: IStats
@@ -23,8 +24,9 @@ export class Digimon {
   type: string;
   attribute: string;
   memory: number;
-  equip_slots: number;
+  slots: number;
   image: string;
+  sprite: string;
   support_skill_id: number;
   digivolveTo?: IDigivoleInfo[] = [];
   digivolveFrom?: IDigivoleInfo[] = [];

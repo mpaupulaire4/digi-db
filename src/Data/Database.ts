@@ -13,7 +13,7 @@ export class Database extends Dexie {
   constructor() {
     super('DigiDB', { autoOpen: true })
     this.version(1).stores({
-      digimon: `id,&name,stage,type,attribute,memory,equip_slots,support_skill_id`,
+      digimon: `id,&name,stage,type,attribute,memory,slots,support_skill_id`,
       // ,stats.01.hp,stats.01.sp,stats.01.atk,stats.01.def,stats.01.int,stats.01.spd,stats.99.hp,stats.99.sp,stats.99.atk,stats.99.def,stats.99.int,stats.99.spd,stats.50.hp,stats.50.sp,stats.50.atk,stats.50.def,stats.50.int,stats.50.spd
       moves: 'id, name, sp_cost, type, power, attribute, inheritable, description',
       supports: 'id, name, description',
