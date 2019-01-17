@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BulmaStyledTheme, Container, Section } from 'bulma-styled-components'
-import { HashRouter } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import { Routes } from './routes'
 import { Header } from './components/Header'
 import { Digimon } from './Data/Objects';
@@ -9,18 +9,22 @@ type State = {
   digimon: Digimon[]
 }
 
+
 class App extends Component<{}, State> {
   render() {
     return (
       <BulmaStyledTheme overrides={{ primary: '#0A5' }}>
         <HashRouter>
           <div className="has-background-grey-light" style={{ minHeight: '100vh' }}>
+            <a href="#/digimon/1">click me</a>
             <Header />
-            <Section >
-              <Container>
-                <Routes/>
-              </Container>
-            </Section>
+            <Route render={(props) => (
+              <Section {...props}>
+                <Container {...props}>
+                  <Routes/>
+                </Container>
+              </Section>
+            )}/>
           </div>
         </HashRouter>
       </BulmaStyledTheme>
