@@ -1,6 +1,5 @@
 import React from 'react'
 import { Navbar } from 'bulma-styled-components'
-import { NavLink } from 'react-router-dom'
 
 
 type Props = {
