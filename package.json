@@ -2,6 +2,7 @@
   "name": "digi-db",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mpaupulaire4.github.com/digi-db",
   "dependencies": {
     "@types/jest": "23.3.12",
     "@types/node": "10.12.18",
@@ -10,6 +11,7 @@
     "@types/react-router-dom": "^4.3.1",
     "bulma-styled-components": "^2.1.7",
     "dexie": "^2.0.4",
+    "gh-pages": "^2.0.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
@@ -17,6 +19,8 @@
     "typescript": "3.2.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
