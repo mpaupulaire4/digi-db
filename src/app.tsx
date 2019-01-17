@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BulmaStyledTheme, Container, Section, Navbar } from 'bulma-styled-components'
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { Routes } from './routes'
 import { Digimon } from './Data/Objects';
 
@@ -11,7 +11,7 @@ type State = {
 class App extends Component<{}, State> {
   render() {
     return (
-      <BulmaStyledTheme>
+      <BulmaStyledTheme overrides={{ primary: '#0A5' }}>
         <Router>
           <div className="has-background-grey-light" style={{ minHeight: '100vh' }}>
             <Navbar className="is-fixed-top is-primary">
