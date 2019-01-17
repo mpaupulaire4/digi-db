@@ -32,6 +32,16 @@ export class Digimon extends Component<Props,State> {
     this.setState({ digimon })
   }
 
+  async componentWillReceiveProps(props: Props) {
+    const digimon = await db.digimon.get(parseInt(this.props.match.params.id))
+    if (digimon) {
+      digimon.join().then(() => {
+        this.setState({ digimon })
+      })
+    }
+    this.setState({ digimon })
+  }
+
   changeStat(level: string) {
     return () => this.setState({ stats: this.state.stats === level ? undefined : level })
   }
@@ -130,7 +140,7 @@ export class Digimon extends Component<Props,State> {
               {digimon.digivolveFrom && digimon.digivolveFrom.map((data) => (
                 <tr key={data.digimon.id}>
                   <td>
-                    <DigimonCard digimon={data.digimon}/>
+                    <DigimonCard link digimon={data.digimon}/>
                   </td>
                   <td>{data.level}</td>
                   <td>{data.require}</td>
@@ -152,7 +162,7 @@ export class Digimon extends Component<Props,State> {
               {digimon.digivolveTo && digimon.digivolveTo.map((data) => (
                 <tr key={data.digimon.id}>
                   <td>
-                    <DigimonCard digimon={data.digimon}/>
+                    <DigimonCard link digimon={data.digimon}/>
                   </td>
                   <td>{data.level}</td>
                   <td>{data.require}</td>
