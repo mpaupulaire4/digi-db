@@ -19,17 +19,15 @@ export class Header extends React.Component<Props, State> {
       <Navbar className="is-fixed-top is-primary">
         <Navbar.Brand>
           <Navbar.Item>DigiDB</Navbar.Item>
-          <Navbar.Burger onClick={() => this.setState({ menu: !menu })} className={menu ? 'is-active' : ''} >
+          <Navbar.Burger onClick={() => this.setState({ menu: !menu })} className={menu ? 'is-active' : undefined} >
             <span/>
             <span/>
             <span/>
           </Navbar.Burger>
         </Navbar.Brand>
-        <Navbar.Menu className={menu ? 'is-active' : ''}>
+        <Navbar.Menu className={menu ? 'is-active' : undefined}>
           <Navbar.Start>
-            <Navbar.Item as="a">
-              <NavLink to="/" style={{ textDecoration: 'none', color:'black' }}>Home</NavLink>
-            </Navbar.Item>
+            <Navbar.Item as="a" href="#/">Home</Navbar.Item>
           </Navbar.Start>
         </Navbar.Menu>
       </Navbar>

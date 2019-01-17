@@ -16,15 +16,8 @@ class App extends Component<{}, State> {
       <BulmaStyledTheme overrides={{ primary: '#0A5' }}>
         <HashRouter>
           <div className="has-background-grey-light" style={{ minHeight: '100vh' }}>
-            <a href="#/digimon/1">click me</a>
             <Header />
-            <Route render={(props) => (
-              <Section {...props}>
-                <Container {...props}>
-                  <Routes/>
-                </Container>
-              </Section>
-            )}/>
+            <Routes/>
           </div>
         </HashRouter>
       </BulmaStyledTheme>

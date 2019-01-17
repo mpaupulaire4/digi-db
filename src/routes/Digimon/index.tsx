@@ -33,8 +33,8 @@ export class Digimon extends Component<Props,State> {
   }
 
   async componentWillReceiveProps(props: Props) {
-    if (this.props.match.params.id === this.props.match.params.id) return
-    const digimon = await db.digimon.get(parseInt(this.props.match.params.id))
+    if (this.props.match.params.id === props.match.params.id) return
+    const digimon = await db.digimon.get(parseInt(props.match.params.id))
     if (digimon) {
       digimon.join().then(() => {
         this.setState({ digimon })
