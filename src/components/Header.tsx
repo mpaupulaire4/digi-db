@@ -26,7 +26,9 @@ export class Header extends React.Component<Props, State> {
         </Navbar.Brand>
         <Navbar.Menu className={menu ? 'is-active' : undefined}>
           <Navbar.Start>
-            <Navbar.Item as="a" href="#/">Home</Navbar.Item>
+            <Navbar.Item as="a" href="#/">Digimon</Navbar.Item>
+            <Navbar.Item as="a" href="#/moves">Moves</Navbar.Item>
+            <Navbar.Item as="a" href="#/supports">Support Skills</Navbar.Item>
           </Navbar.Start>
         </Navbar.Menu>
       </Navbar>

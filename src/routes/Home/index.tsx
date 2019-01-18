@@ -31,7 +31,7 @@ export class Home extends Component<{},State> {
       <div>
         <Input onChange={this.onChange}/>
         <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
-          {this.state.digimon.filter((digimon) => name ? digimon.name.toLocaleLowerCase().includes(name) : true).map((digimon) => (
+          {this.state.digimon.filter((digimon) => name ? digimon.name.toLowerCase().includes(name) : true).map((digimon) => (
             <DigimonCard
               link
               key={digimon.id}
