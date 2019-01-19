@@ -28,7 +28,7 @@ export class Digimon implements IDigimon {
   slots: number;
   image: string;
   sprite: string;
-  favorite: boolean;
+  favorite: boolean = false;
   support_skill_id: number;
   digivolveTo?: IDigivoleInfo[] = [];
   digivolveFrom?: IDigivoleInfo[] = [];

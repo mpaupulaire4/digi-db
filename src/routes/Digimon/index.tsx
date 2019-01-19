@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { DigimonCard } from '../../components/DigimonCard'
 import { MoveCard } from '../../components/MoveCard'
-import { Media, Box, Card, Content, Table } from 'bulma-styled-components'
+import { Media, Box, Card, Content, Table, Checkbox } from 'bulma-styled-components'
 import { db } from '../../Data'
 import { Digimon as IDigimon } from '../../Data/Objects'
 
@@ -43,6 +43,13 @@ export class Digimon extends Component<Props,State> {
     this.setState({ digimon })
   }
 
+  favorite = async () => {
+    const { digimon } = this.state
+    if (!digimon) return
+    await digimon.toggleFavorite()
+    this.setState({ digimon })
+
+  }
   changeStat(level: string) {
     return () => this.setState({ stats: this.state.stats === level ? undefined : level })
   }
@@ -71,6 +78,10 @@ export class Digimon extends Component<Props,State> {
               </Media.Left>
               <Media.Content>
                 <Content>
+                  <Checkbox>
+                    <input type="checkbox" onChange={this.favorite} checked={digimon.favorite}/>
+                    Favorite
+                  </Checkbox>
                   <p>
                     <strong>Type: </strong> {digimon.type}
                     <br/>
