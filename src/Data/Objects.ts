@@ -11,13 +11,14 @@ export interface IDigimon {
   slots: number;
   image: string;
   sprite: string;
+  favorite: boolean;
   support_skill_id: number;
   stats: {
     [level: string]: IStats
   };
 }
 
-export class Digimon {
+export class Digimon implements IDigimon {
   id: number;
   name: string;
   stage: string;
@@ -27,6 +28,7 @@ export class Digimon {
   slots: number;
   image: string;
   sprite: string;
+  favorite: boolean;
   support_skill_id: number;
   digivolveTo?: IDigivoleInfo[] = [];
   digivolveFrom?: IDigivoleInfo[] = [];
@@ -38,6 +40,11 @@ export class Digimon {
 
   constructor(digimon: IDigimon) {
     Object.assign(this, digimon)
+  }
+
+  async toggleFavorite() {
+    this.favorite = !this.favorite
+    return db.digimon.update(this.id, { favorite: this.favorite })
   }
 
   async join() {
@@ -106,7 +113,6 @@ export class Digimon {
         digimon: digi
       }
     })
-
   }
 }
 
