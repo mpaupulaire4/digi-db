@@ -22,7 +22,7 @@ export class Moves extends Component<{},State> {
   }
 
   onChange = (e: any) => {
-    this.setState({ name: e.target.value })
+    this.setState({ name: e.target.value.toLowerCase() })
   }
 
   render() {
