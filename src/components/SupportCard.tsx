@@ -32,7 +32,7 @@ export class SupportCard extends PureComponent<Props> {
         <Card.Header className="has-background-primary">
           <Card.Header.Title>{support.name}</Card.Header.Title>
           <Card.Header.Icon>
-            {/* LV. {level} */}
+            #{support.id}
           </Card.Header.Icon>
         </Card.Header>
         <Card.Content>

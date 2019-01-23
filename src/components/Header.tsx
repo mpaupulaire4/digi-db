@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar } from 'bulma-styled-components'
+import { Navbar, Tabs } from 'bulma-styled-components'
 
 
 type Props = {
@@ -8,29 +8,24 @@ type Props = {
 type State = {
   menu: boolean
 }
+
+
 export class Header extends React.Component<Props, State> {
-  state: State = {
-    menu: false
-  }
   render() {
-    const { menu } = this.state
+    function match(path: string) {
+      return window.location.hash === path ? 'is-active' : undefined
+    }
     return (
       <Navbar className="is-fixed-top is-primary">
-        <Navbar.Brand>
-          <Navbar.Item>DigiDB</Navbar.Item>
-          <Navbar.Burger onClick={() => this.setState({ menu: !menu })} className={menu ? 'is-active' : undefined} >
-            <span/>
-            <span/>
-            <span/>
-          </Navbar.Burger>
-        </Navbar.Brand>
-        <Navbar.Menu className={menu ? 'is-active' : undefined}>
-          <Navbar.Start>
-            <Navbar.Item as="a" href="#/">Digimon</Navbar.Item>
-            <Navbar.Item as="a" href="#/moves">Moves</Navbar.Item>
-            <Navbar.Item as="a" href="#/supports">Support Skills</Navbar.Item>
-          </Navbar.Start>
-        </Navbar.Menu>
+        <div style={{ position: 'relative', height: 0 }}>
+          <Tabs className="is-boxed is-centered" style={{ marginBottom: -53, position: 'absolute', left: 0, right: 0, bottom: 0 }}>
+            <ul>
+              <li className={match("#/")}><a href="#/" className="is-active">Digimon</a></li>
+              <li className={match("#/moves")}><a href="#/moves">Moves</a></li>
+              <li className={match("#/supports")}><a href="#/supports">Support Skills</a></li>
+            </ul>
+          </Tabs>
+        </div>
       </Navbar>
     )
   }

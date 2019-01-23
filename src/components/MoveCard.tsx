@@ -33,7 +33,7 @@ export class MoveCard extends PureComponent<Props> {
         <Card.Header className="has-background-primary">
           <Card.Header.Title>{move.name}</Card.Header.Title>
           <Card.Header.Icon>
-            LV. {level}
+            {level ? `LV. ${level}` : `#${move.id}`}
           </Card.Header.Icon>
         </Card.Header>
         <Card.Content>

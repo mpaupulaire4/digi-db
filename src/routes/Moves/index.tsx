@@ -25,15 +25,27 @@ export class Moves extends Component<{},State> {
     this.setState({ name: e.target.value.toLowerCase() })
   }
 
-  render() {
+  moveFilter = (move: Move) => {
     const { name } = this.state
+    if (!name) return true
+    const words = name.split(/\s+/)
+    for (let word of words) {
+      if (
+        !move.name.toLowerCase().includes(word.toLowerCase()) &&
+        !move.description.toLowerCase().includes(word.toLowerCase())
+      ) return false
+    }
+    return true
+  }
+
+  render() {
     return (
       <div>
         <Input onChange={this.onChange}/>
         <br/>
         <br/>
         <div >
-          {this.state.moves.filter((move) => name ? move.name.toLowerCase().includes(name) : true).map((move) => (
+          {this.state.moves.filter(this.moveFilter).map((move) => (
             <div key={move.id}>
               <MoveCard
                 move={move}

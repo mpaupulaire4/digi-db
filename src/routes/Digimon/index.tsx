@@ -62,7 +62,7 @@ export class Digimon extends Component<Props,State> {
         <Card>
           <Card.Header className="has-background-primary">
             <Card.Header.Title>
-              {digimon.name}
+              #{digimon.id} {digimon.name}
             </Card.Header.Title>
             <Card.Header.Icon>
               {digimon.stage}
