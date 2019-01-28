@@ -16,11 +16,12 @@ const AttrMap: { [type: string]: string } = {
   Plant: 'fas fa-lg fa-leaf has-text-green',
   Light: 'fas fa-lg fa-sun has-text-yellow',
   Water: 'fas fa-lg fa-tint has-text-info',
-  Wind: 'fas fa-lg fa-wind has-text-light',
+  Wind: 'fas fa-lg fa-wind has-text-link',
   Dark: 'fas fa-lg fa-moon has-text-dark',
   Earth: 'fas fa-lg fa-mountain has-text-grey',
   Fire: 'fas fa-lg fa-fire has-text-red',
   Electric: 'fas fa-lg fa-bolt has-text-yellow',
+  Thunder: 'fas fa-lg fa-bolt has-text-yellow',
 }
 
 
@@ -28,6 +29,8 @@ export class MoveCard extends PureComponent<Props> {
 
   render() {
     const { move, level } = this.props
+    if (!AttrMap[move.attribute]) console.log(move.attribute)
+
     return (
       <Card>
         <Card.Header className="has-background-primary">
