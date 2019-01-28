@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input } from 'bulma-styled-components'
+import { HeaderSearch } from '../../components/Header'
 import { SupportCard } from '../../components/SupportCard'
 import { db } from '../../Data'
 import { Support } from '../../Data/Objects'
@@ -29,9 +29,10 @@ export class Supports extends Component<{},State> {
     const { name } = this.state
     return (
       <div>
-        <Input onChange={this.onChange}/>
-        <br/>
-        <br/>
+        <HeaderSearch
+          onChange={this.onChange}
+          value={name}
+        />
         <div >
           {this.state.supports.filter((support) => name ? support.name.toLowerCase().includes(name) : true).map((support) => (
             <div key={support.id}>

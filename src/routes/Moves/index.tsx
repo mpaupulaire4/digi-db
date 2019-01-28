@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Input } from 'bulma-styled-components'
 import { MoveCard } from '../../components/MoveCard'
+import { HeaderSearch } from '../../components/Header'
 import { db } from '../../Data'
 import { Move } from '../../Data/Objects'
 
@@ -41,9 +41,10 @@ export class Moves extends Component<{},State> {
   render() {
     return (
       <div>
-        <Input onChange={this.onChange}/>
-        <br/>
-        <br/>
+        <HeaderSearch
+          onChange={this.onChange}
+          value={name}
+        />
         <div >
           {this.state.moves.filter(this.moveFilter).map((move) => (
             <div key={move.id}>

@@ -1,6 +1,13 @@
 import React, { Component, FormEvent } from "react";
-import { Input, Checkbox } from 'bulma-styled-components'
+import {
+  Input,
+  Checkbox,
+  Card,
+  Icon
+} from 'bulma-styled-components'
 import { DigimonCard } from '../../components/DigimonCard'
+import { HeaderSearch } from '../../components/Header'
+import { Favorite } from '../../components/Favorite'
 import { db } from '../../Data'
 import { Digimon } from '../../Data/Objects'
 
@@ -39,14 +46,14 @@ export class Home extends Component<{},State> {
   }
 
   render() {
-    const { favorites } = this.state
+    const { favorites, name } = this.state
     return (
       <div>
-        <Input onChange={this.onChange}/>
-        <Checkbox>
-          <input type="checkbox" checked={favorites} onChange={this.toggleFavorite}/>
-          Favorites
-        </Checkbox>
+        <HeaderSearch
+          Icon={<Favorite onClick={this.toggleFavorite} value={favorites} />}
+          onChange={this.onChange}
+          value={name}
+        />
         <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
           {this.state.digimon.filter(this.filter).map((digimon) => (
             <DigimonCard
