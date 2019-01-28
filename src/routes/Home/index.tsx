@@ -51,6 +51,7 @@ export class Home extends Component<{},State> {
       <div>
         <HeaderSearch
           Icon={<Favorite onClick={this.toggleFavorite} fav={favorites} />}
+          placeholder="Filter by Name"
           onChange={this.onChange}
           value={name}
         />

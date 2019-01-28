@@ -25,6 +25,19 @@ export class Supports extends Component<{},State> {
     this.setState({ name: e.target.value.toLowerCase() })
   }
 
+  filter = (move: Support) => {
+    const { name } = this.state
+    if (!name) return true
+    const words = name.split(/\s+/)
+    for (let word of words) {
+      if (
+        !move.name.toLowerCase().includes(word.toLowerCase()) &&
+        !move.description.toLowerCase().includes(word.toLowerCase())
+      ) return false
+    }
+    return true
+  }
+
   render() {
     const { name } = this.state
     return (
@@ -34,7 +47,7 @@ export class Supports extends Component<{},State> {
           value={name}
         />
         <div >
-          {this.state.supports.filter((support) => name ? support.name.toLowerCase().includes(name) : true).map((support) => (
+          {this.state.supports.filter(this.filter).map((support) => (
             <div key={support.id}>
               <SupportCard
                 support={support}

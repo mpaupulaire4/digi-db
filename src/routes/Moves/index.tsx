@@ -43,6 +43,7 @@ export class Moves extends Component<{},State> {
       <div>
         <HeaderSearch
           onChange={this.onChange}
+          placeholder="Filter by Name"
           value={name}
         />
         <div >
