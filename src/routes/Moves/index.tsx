@@ -49,6 +49,7 @@ export class Moves extends Component<{},State> {
           {this.state.moves.filter(this.moveFilter).map((move) => (
             <div key={move.id}>
               <MoveCard
+                withDigimon={true}
                 move={move}
               />
               <br/>
