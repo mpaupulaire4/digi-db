@@ -40,7 +40,7 @@ export function HeaderSearch({ Icon, children, ...props}: HeaderSearchProps) {
   return (
     <div style={{ height: 30 }}>
       <Card style={{ position: 'fixed', top: 52, left: 0, right: 0, zIndex: 100 }}>
-        <Card.Header >
+        <Card.Header className="has-background-grey-lighter">
           <Card.Header.Title>
             <Input className="is-primary" {...props}/>
           </Card.Header.Title>

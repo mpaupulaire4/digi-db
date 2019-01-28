@@ -53,7 +53,7 @@ export class MoveCard extends PureComponent<Props, State> {
       <>
         <Card>
           <Card.Header className="has-background-primary" onClick={this.toggleOpen}>
-            <Card.Header.Title>
+            <Card.Header.Title className="has-text-white-ter">
               #{move.id} {move.name}
             </Card.Header.Title>
             {level && (
