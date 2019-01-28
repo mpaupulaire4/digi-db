@@ -77,7 +77,7 @@ export class Digimon extends Component<Props,State> {
                 />
               </Media.Left>
               <Media.Content>
-                <Content style={{position: 'relative'}}>
+                <Content style={{ position: 'relative' }}>
                   <Icon style={{ position: 'absolute', top: 0, right: 0, cursor: 'pointer' }} onClick={this.favorite}>
                     <i className={`${digimon.favorite ? 'fas' : 'far'} fa-lg fa-heart`}/>
                   </Icon>
