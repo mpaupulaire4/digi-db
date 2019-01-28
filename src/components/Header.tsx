@@ -42,7 +42,7 @@ export function HeaderSearch({ Icon, children, ...props}: HeaderSearchProps) {
       <Card style={{ position: 'fixed', top: 52, left: 0, right: 0, zIndex: 100 }}>
         <Card.Header >
           <Card.Header.Title>
-            <Input {...props}/>
+            <Input className="is-primary" {...props}/>
           </Card.Header.Title>
           {Icon && <Card.Header.Icon children={Icon}/>}
         </Card.Header>

@@ -50,7 +50,7 @@ export class Home extends Component<{},State> {
     return (
       <div>
         <HeaderSearch
-          Icon={<Favorite onClick={this.toggleFavorite} value={favorites} />}
+          Icon={<Favorite onClick={this.toggleFavorite} fav={favorites} />}
           onChange={this.onChange}
           value={name}
         />

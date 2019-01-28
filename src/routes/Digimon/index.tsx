@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { DigimonCard } from '../../components/DigimonCard'
 import { MoveCard } from '../../components/MoveCard'
+import { Favorite } from '../../components/Favorite'
 import { Media, Box, Card, Content, Table, Checkbox, Icon } from 'bulma-styled-components'
 import { db } from '../../Data'
 import { Digimon as IDigimon } from '../../Data/Objects'
@@ -78,9 +79,11 @@ export class Digimon extends Component<Props,State> {
               </Media.Left>
               <Media.Content>
                 <Content style={{ position: 'relative' }}>
-                  <Icon style={{ position: 'absolute', top: 0, right: 0, cursor: 'pointer' }} onClick={this.favorite}>
-                    <i className={`${digimon.favorite ? 'fas' : 'far'} fa-lg fa-heart`}/>
-                  </Icon>
+                  <Favorite
+                    style={{ position: 'absolute', top: 0, right: 0 }}
+                    onClick={this.favorite}
+                    fav={digimon.favorite}
+                  />
                   <p>
                     <strong>Type: </strong> {digimon.type}
                     <br/>
