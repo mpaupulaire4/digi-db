@@ -18,7 +18,7 @@ export class Header extends React.Component<Props, State> {
     return (
       <Navbar className="is-fixed-top is-primary">
         <div style={{ position: 'relative', height: 0 }}>
-          <Tabs className="is-boxed is-centered" style={{ marginBottom: -53, position: 'absolute', left: 0, right: 0, bottom: 0 }}>
+          <Tabs className="is-boxed is-centered" style={{ position: 'absolute', left: 0, right: 0, bottom: -54 }}>
             <ul>
               <li className={match("#/")}><a href="#/" className="is-active">Digimon</a></li>
               <li className={match("#/moves")}><a href="#/moves">Moves</a></li>
