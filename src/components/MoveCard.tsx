@@ -77,7 +77,7 @@ export class MoveCard extends PureComponent<Props, State> {
         <Card>
           <Card.Header className={`has-background-e-${move.attribute.toLowerCase()}`} onClick={this.toggleOpen}>
             <Card.Header.Title className={textMap[move.attribute]}>
-              #{move.id} {move.name}
+              #{move.id.toString().padStart(3, '0')} {move.name}
             </Card.Header.Title>
             <Card.Header.Icon className={textMap[move.attribute]}>
               <Icon>
@@ -86,7 +86,7 @@ export class MoveCard extends PureComponent<Props, State> {
               <Icon>
                 <i className={AttrMap[move.attribute]}/>
               </Icon>
-              {level ? `LV. ${level}`:`#${move.id.toString().padStart(3, '0')}`}
+              {level && `LV. ${level}`}
             </Card.Header.Icon>
           </Card.Header>
           {open && (

@@ -1,15 +1,37 @@
 import React, { Component } from "react";
 import { MoveCard } from '../../components/MoveCard'
 import { HeaderSearch } from '../../components/Header'
+import { TagSelect } from '../../components/TagSelect'
 import { db } from '../../Data'
 import { Move } from '../../Data/Objects'
-import { Icon } from "bulma-styled-components";
+import { Icon, Tags, Tag, Heading } from "bulma-styled-components";
 
 type State = {
   moves: Move[]
   name: string
   filterOpen: boolean
+  attrs: string[]
+  types: string[]
 }
+
+const Attributes = [
+  'Fire',
+  'Water',
+  'Plant',
+  'Electric',
+  'Earth',
+  'Wind',
+  'Light',
+  'Dark',
+  'Neutral',
+]
+
+const Types = [
+  'Fixed',
+  'Physical',
+  'Magic',
+  'Support',
+]
 
 
 export class Moves extends Component<{},State> {
@@ -17,6 +39,8 @@ export class Moves extends Component<{},State> {
     moves: [],
     name: '',
     filterOpen: false,
+    attrs: [],
+    types: []
   }
 
   constructor(props: {}) {
@@ -37,8 +61,23 @@ export class Moves extends Component<{},State> {
     this.setState({ name: e.target.value.toLowerCase() })
   }
 
+  attrChange = (attrs: string[]) => {
+    this.setState({
+      attrs
+    })
+  }
+
+  typeChange = (types: string[]) => {
+    this.setState({
+      types
+    })
+  }
+
   moveFilter = (move: Move) => {
-    const { name } = this.state
+    const { name, attrs, types } = this.state
+    if (attrs.length && !attrs.includes(move.attribute)) return false
+    if (types.length && !types.includes(move.type)) return false
+
     if (!name) return true
     const words = name.split(/\s+/)
     for (let word of words) {
@@ -55,7 +94,7 @@ export class Moves extends Component<{},State> {
   }
 
   render() {
-    const { name, filterOpen } = this.state
+    const { name, filterOpen, attrs, types } = this.state
     return (
       <div>
         <HeaderSearch
@@ -65,7 +104,20 @@ export class Moves extends Component<{},State> {
           value={name}
         >
         {filterOpen && (
-          <div>Filters Coming Soon</div>
+          <div>
+            <TagSelect
+              value={attrs}
+              label="Attribute"
+              options={Attributes}
+              onChange={this.attrChange}
+            />
+            <TagSelect
+              value={types}
+              label="Type"
+              options={Types}
+              onChange={this.typeChange}
+            />
+          </div>
         )}
         </HeaderSearch>
         <div >
