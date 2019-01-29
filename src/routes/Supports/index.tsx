@@ -11,14 +11,24 @@ type State = {
 
 
 export class Supports extends Component<{},State> {
-  state: State = {
+  private static State: State = {
     supports: [],
     name: ''
   }
 
+  constructor(props: {}) {
+    super(props)
+    this.state = Supports.State
+  }
+
   async componentDidMount() {
+    if (this.state.supports.length) return
     const supports = await db.supports.toArray()
     this.setState({ supports })
+  }
+
+  async componentWillUnmount() {
+    Supports.State = this.state
   }
 
   onChange = (e: any) => {

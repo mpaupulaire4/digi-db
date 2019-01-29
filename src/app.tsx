@@ -34,7 +34,7 @@ class App extends Component<{}, State> {
     return (
       <BulmaStyledTheme overrides={ThemeOverrides}>
         <HashRouter>
-          <div className="has-background-grey-light" style={{ minHeight: '100vh' }}>
+          <div className="has-background-grey-light" style={{ minHeight: '95vh' }}>
             <Header />
             <Routes/>
             <NotificationBay />
