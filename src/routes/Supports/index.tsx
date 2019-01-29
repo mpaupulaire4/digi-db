@@ -43,6 +43,7 @@ export class Supports extends Component<{},State> {
     return (
       <div>
         <HeaderSearch
+          placeholder="Filter by Name"
           onChange={this.onChange}
           value={name}
         />
