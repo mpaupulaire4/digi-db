@@ -3,17 +3,20 @@ import { MoveCard } from '../../components/MoveCard'
 import { HeaderSearch } from '../../components/Header'
 import { db } from '../../Data'
 import { Move } from '../../Data/Objects'
+import { Icon } from "bulma-styled-components";
 
 type State = {
   moves: Move[]
   name: string
+  filterOpen: boolean
 }
 
 
 export class Moves extends Component<{},State> {
   private static State: State = {
     moves: [],
-    name: ''
+    name: '',
+    filterOpen: false,
   }
 
   constructor(props: {}) {
@@ -49,15 +52,24 @@ export class Moves extends Component<{},State> {
     return true
   }
 
+  toggleFilters = () => {
+    this.setState({ filterOpen: !this.state.filterOpen })
+  }
+
   render() {
-    const { name } = this.state
+    const { name, filterOpen } = this.state
     return (
       <div>
         <HeaderSearch
+          Icon={<FilterIcon onClick={this.toggleFilters}/>}
           onChange={this.onChange}
           placeholder="Filter by Name"
           value={name}
-        />
+        >
+        {filterOpen && (
+          <div>Filters Coming Soon</div>
+        )}
+        </HeaderSearch>
         <div >
           {this.state.moves.filter(this.moveFilter).map((move) => (
             <div key={move.id}>
@@ -70,6 +82,17 @@ export class Moves extends Component<{},State> {
           ))}
         </div>
       </div>
+    )
+  }
+}
+
+class FilterIcon extends React.PureComponent<{ onClick: () => void }> {
+  render() {
+    const { onClick } = this.props
+    return (
+      <Icon onClick={onClick} style={{ cursor: 'pointer' }} className="has-text-primary">
+        <i className="fas fa-lg fa-sliders-h"/>
+      </Icon>
     )
   }
 }

@@ -46,7 +46,7 @@ export function HeaderSearch({ Icon, children, ...props}: HeaderSearchProps) {
           </Card.Header.Title>
           {Icon && <Card.Header.Icon children={Icon}/>}
         </Card.Header>
-        {children && <Card.Content children={children}/>}
+        {children && <Card.Content className="has-background-grey-lighter" children={children}/>}
       </Card>
     </div>
   )

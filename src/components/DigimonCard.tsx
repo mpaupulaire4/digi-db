@@ -1,12 +1,9 @@
 import React, { PureComponent } from "react";
 import { Box, Image } from 'bulma-styled-components'
+import { Digimon } from "../Data/Objects";
 
 type Props = {
-  digimon: {
-    id: number,
-    name: string,
-    image: string,
-  },
+  digimon: Digimon,
   size?: 16 | 24 | 32 | 48 | 64 | 96 | 128,
   link?: boolean
   nameless?: boolean
@@ -19,7 +16,12 @@ export class DigimonCard extends PureComponent<Props> {
   render() {
     const { digimon, link, size, nameless } = this.props
     return  (
-      <Box as={link ? 'a' : undefined} href={`#/digimon/${digimon.id}`} className="is-paddingless has-background-grey-lighter is-clipped" style={{margin: 5, maxWidth: size }} >
+      <Box
+        as={link ? 'a' : undefined}
+        href={`#/digimon/${digimon.id}`}
+        className="is-paddingless has-background-grey-lighter is-clipped"
+        style={{margin: 5, maxWidth: size, position: 'relative' }}
+      >
         <Image className={`is-${size}x${size}`}>
           <img src={digimon.image} alt="digimon"/>
           {!nameless && (
