@@ -3,6 +3,9 @@ import {
   Card,
   Content,
   Icon,
+  Title,
+  Subtitle,
+  Heading
 } from 'bulma-styled-components'
 import { Move, Digimon } from '../Data/Objects'
 
@@ -93,28 +96,34 @@ export class MoveCard extends PureComponent<Props, State> {
               </Content>
             </Card.Content>
           )}
-          <Card.Footer className="is-size-7">
-            <Card.Footer.Item >
-              <strong style={{paddingRight: 5}}>Power: </strong> {move.power}
+          <Card.Footer className="is-size-6">
+            <Card.Footer.Item style={{ display: 'flex', flexDirection: 'column' }}>
+              <Title className="is-size-7" style={{ marginBottom: 15, marginTop: -10 }}>Power</Title>
+              <Subtitle style={{ marginBottom: -10 }} className="is-size-6 has-text-weight-bold	">{move.power}</Subtitle>
             </Card.Footer.Item>
-            <Card.Footer.Item>
-              <strong style={{paddingRight: 5}}>Cost: </strong> {move.sp_cost}
+            <Card.Footer.Item style={{ display: 'flex', flexDirection: 'column' }}>
+              <Title className="is-size-7" style={{ marginBottom: 15, marginTop: -10 }}>Cost</Title>
+              <Subtitle style={{ marginBottom: -10 }} className="is-size-6 has-text-weight-bold	">{move.sp_cost}</Subtitle>
             </Card.Footer.Item>
-            <Card.Footer.Item>
-              <strong style={{paddingRight: 5}}>Inherit: </strong> {move.inheritable}
+            <Card.Footer.Item style={{ display: 'flex', flexDirection: 'column' }}>
+              <Title className="is-size-7" style={{ marginBottom: 15, marginTop: -10 }}>Inherit</Title>
+              <Subtitle style={{ marginBottom: -10 }} className="is-size-6 has-text-weight-bold	">{move.inheritable}</Subtitle>
             </Card.Footer.Item>
             {withDigimon && (
-              <Card.Footer.Item as="a" onClick={this.toggleDigimon}>
-                <strong style={{paddingRight: 5}}>Digimon: </strong> {digimon ? digimon.length : (
-                  <Icon className="is-small">
-                    <i className="fas fa-spinner fa-pulse" />
-                  </Icon>
-                )}
+              <Card.Footer.Item as="a" onClick={this.toggleDigimon} style={{ display: 'flex', flexDirection: 'column' }}>
+                <Title className="is-size-7" style={{ marginBottom: 15, marginTop: -10 }}>Digimon</Title>
+                <Subtitle style={{ marginBottom: -10 }} className="is-size-6 has-text-weight-bold	">
+                  {digimon ? digimon.length : (
+                    <Icon className="is-small">
+                      <i className="fas fa-spinner fa-pulse" />
+                    </Icon>
+                  )}
+                </Subtitle>
               </Card.Footer.Item>
             )}
           </Card.Footer>
         </Card>
-        {withDigimon && digimonOpen && digimon && digimon.length && (
+        {withDigimon && digimonOpen && digimon && digimon.length > 0 && (
           <Card>
             <Card.Content>
 
