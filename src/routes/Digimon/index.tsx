@@ -76,9 +76,6 @@ export class Digimon extends Component<Props,State> {
                   nameless
                   digimon={digimon}
                 />
-                <Icon className={`has-text-e-${digimon.attribute.toLowerCase()}`}>
-                  <i className="fas fa-lg fa-cube"/>
-                </Icon>
               </Media.Left>
               <Media.Content>
                 <Content style={{ position: 'relative' }}>
@@ -87,6 +84,9 @@ export class Digimon extends Component<Props,State> {
                     onClick={this.favorite}
                     fav={digimon.favorite}
                   />
+                  <Icon className={`has-text-e-${digimon.attribute.toLowerCase()}`} style={{ position: 'absolute', right: 0, bottom: 0 }}>
+                    <i className="fas fa-lg fa-cube"/>
+                  </Icon>
                   <p>
                     <strong>Type: </strong> {digimon.type}
                     <br/>
