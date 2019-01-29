@@ -19,15 +19,28 @@ type State = {
 
 
 export class Home extends Component<{},State> {
-  state: State = {
+  state: State = Home.State
+
+  constructor(props: {}) {
+    super(props)
+    this.state = Home.State
+  }
+
+  private static State: State = {
     digimon: [],
     name: '',
     favorites: false
   }
 
   async componentDidMount() {
-    const digimon = await db.digimon.toArray()
-    this.setState({ digimon })
+    if (!this.state.digimon.length) {
+      const digimon = await db.digimon.toArray()
+      this.setState({ digimon })
+    }
+  }
+
+  async componentWillUnmount() {
+    Home.State = this.state
   }
 
   onChange = (e: any) => {
