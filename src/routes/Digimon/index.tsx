@@ -62,10 +62,10 @@ export class Digimon extends Component<Props,State> {
       <div>
         <Card>
           <Card.Header className="has-background-primary">
-            <Card.Header.Title>
-              #{digimon.id} {digimon.name}
+            <Card.Header.Title className="has-text-white-ter">
+              #{digimon.id.toString().padStart(3, '0')} {digimon.name}
             </Card.Header.Title>
-            <Card.Header.Icon>
+            <Card.Header.Icon className="has-text-white-ter">
               {digimon.stage}
             </Card.Header.Icon>
           </Card.Header>
@@ -145,9 +145,9 @@ export class Digimon extends Component<Props,State> {
           <Table className="is-bordered is-fullwidth">
             <thead className="has-background-primary">
               <tr>
-                <th>Digivolves From</th>
-                <th>Level</th>
-                <th>Requires</th>
+                <th className="has-text-white-ter">Digi. Fr.</th>
+                <th className="has-text-white-ter">Level</th>
+                <th className="has-text-white-ter">Requires</th>
               </tr>
             </thead>
             <tbody>
@@ -167,9 +167,9 @@ export class Digimon extends Component<Props,State> {
           <Table className="is-bordered is-fullwidth">
             <thead className="has-background-primary">
               <tr>
-                <th>Digivolves To</th>
-                <th>Level</th>
-                <th>Requires</th>
+                <th className="has-text-white-ter">Digi. To.</th>
+                <th className="has-text-white-ter">Level</th>
+                <th className="has-text-white-ter">Requires</th>
               </tr>
             </thead>
             <tbody>

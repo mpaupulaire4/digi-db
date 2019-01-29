@@ -14,7 +14,18 @@ const ThemeOverrides = {
   primary: '#0A5',
   'tabs-link-active-color': '#0A5',
   'tabs-boxed-link-active-background-color': '#dbdbdb',
-  'tabs-link-color': '#f5f5f5'
+  'tabs-link-color': '#f5f5f5',
+  'custom-colors': {
+    'e-fire': '#e63900',
+    'e-water': '#1a8cff',
+    'e-plant': '#59b300',
+    'e-electric': '#ffff00',
+    'e-earth': '#996633',
+    'e-wind': '#00cc99',
+    'e-neutral': '#999999',
+    'e-light': '#fffae6',
+    'e-dark': '#330033',
+  }
 }
 
 

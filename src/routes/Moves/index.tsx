@@ -39,6 +39,7 @@ export class Moves extends Component<{},State> {
   }
 
   render() {
+    const { name } = this.state
     return (
       <div>
         <HeaderSearch

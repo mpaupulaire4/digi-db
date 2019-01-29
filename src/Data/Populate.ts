@@ -1,13 +1,13 @@
 import { Database } from './Database'
 import data from './data.json'
-import { Digimon, IDigimon } from './Objects';
+import { Digimon, IDigimon, Move } from './Objects';
 
 export function populate(db: Database) {
   db.on('populate', () => {
     console.log('populating')
     try {
-      db.digimon.bulkPut(data.digimon.map((digi) => new Digimon(digi as unknown as IDigimon)))
-      db.moves.bulkPut(data.moves)
+      db.digimon.bulkPut(data.digimon as unknown as Digimon[] )
+      db.moves.bulkPut(data.moves as Move[])
       db.supports.bulkPut(data.supports)
       db.movelearn.bulkPut(data.movelearn)
       db.digivolve.bulkPut(data.digivolve)

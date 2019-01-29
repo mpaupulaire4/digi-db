@@ -145,6 +145,10 @@ export class Move {
   attribute: string;
   inheritable: string;
   description: string;
+
+  async digimon(): Promise<Digimon[]> {
+    return []
+  }
 }
 
 export class Support {
