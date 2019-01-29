@@ -69,7 +69,12 @@ export class Digimon extends Component<Props,State> {
               {digimon.stage}
             </Card.Header.Icon>
           </Card.Header>
-          <Card.Content>
+          <Card.Content style={{ position: 'relative' }}>
+            <Favorite
+              style={{ position: 'absolute', bottom: 25, right: 20 }}
+              onClick={this.favorite}
+              fav={digimon.favorite}
+            />
             <Media>
               <Media.Left as="figure">
                 <DigimonCard
@@ -78,12 +83,7 @@ export class Digimon extends Component<Props,State> {
                 />
               </Media.Left>
               <Media.Content>
-                <Content style={{ position: 'relative' }}>
-                  <Favorite
-                    style={{ position: 'absolute', top: 0, right: 0 }}
-                    onClick={this.favorite}
-                    fav={digimon.favorite}
-                  />
+                <Content >
                   <span style={{ textDecorationLine: 'underline' }}>
                     <strong>{digimon.supportSkill && digimon.supportSkill.name}</strong>
                   </span>
