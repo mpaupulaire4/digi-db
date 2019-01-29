@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { DigimonCard } from '../../components/DigimonCard'
 import { MoveCard } from '../../components/MoveCard'
 import { Favorite } from '../../components/Favorite'
@@ -20,7 +20,7 @@ type Props = {
 }
 
 
-export class Digimon extends Component<Props,State> {
+export class Digimon extends React.Component<Props,State> {
   state: State = {}
 
   async componentDidMount() {
