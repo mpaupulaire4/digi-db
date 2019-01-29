@@ -31,7 +31,6 @@ export class Home extends Component<{},State> {
   }
 
   async componentDidMount() {
-    if (this.state.digimon.length) return
     const digimon = await db.digimon.toArray()
     this.setState({ digimon })
   }

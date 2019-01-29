@@ -22,7 +22,6 @@ export class Supports extends Component<{},State> {
   }
 
   async componentDidMount() {
-    if (this.state.supports.length) return
     const supports = await db.supports.toArray()
     this.setState({ supports })
   }

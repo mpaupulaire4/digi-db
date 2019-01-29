@@ -25,8 +25,6 @@ export class Moves extends Component<{},State> {
   }
 
   async componentDidMount() {
-    if (this.state.moves.length) return
-
     const moves = await db.moves.toArray()
     this.setState({ moves })
   }
