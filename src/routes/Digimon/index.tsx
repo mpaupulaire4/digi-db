@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { DigimonCard } from '../../components/DigimonCard'
 import { MoveCard } from '../../components/MoveCard'
 import { Favorite } from '../../components/Favorite'
-import { Media, Box, Card, Content, Table, Checkbox, Icon } from 'bulma-styled-components'
+import { Media, Box, Card, Content, Table } from 'bulma-styled-components'
 import { db } from '../../Data'
 import { Digimon as IDigimon } from '../../Data/Objects'
 
@@ -84,30 +84,14 @@ export class Digimon extends Component<Props,State> {
                     onClick={this.favorite}
                     fav={digimon.favorite}
                   />
-                  <Icon className={`has-text-e-${digimon.attribute.toLowerCase()}`} style={{ position: 'absolute', right: 0, bottom: 0 }}>
-                    <i className="fas fa-lg fa-cube"/>
-                  </Icon>
-                  <p>
-                    <strong>Type: </strong> {digimon.type}
-                    <br/>
-                    <strong>Attribute: </strong> {digimon.attribute}
-                    <br/>
-                    <strong>Memory: </strong> {digimon.memory}
-                    <br/>
-                    <strong>Slots: </strong> {digimon.slots}
-                  </p>
+                  <span style={{ textDecorationLine: 'underline' }}>
+                    <strong>{digimon.supportSkill && digimon.supportSkill.name}</strong>
+                  </span>
+                  <br/>
+                  {digimon.supportSkill && digimon.supportSkill.description}
                 </Content>
               </Media.Content>
             </Media>
-            {digimon.supportSkill && (
-              <Content>
-                <span style={{ textDecorationLine: 'underline' }}>
-                  <strong>Support Skill: </strong> {digimon.supportSkill.name}
-                </span>
-                <br/>
-                {digimon.supportSkill.description}
-              </Content>
-            )}
           </Card.Content>
           <Card.Footer>
             <Card.Footer.Item as="a" onClick={this.changeStat('01')}>LV. 01</Card.Footer.Item>
