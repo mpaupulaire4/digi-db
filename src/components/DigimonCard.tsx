@@ -66,13 +66,13 @@ export class DigimonCard extends PureComponent<Props> {
     return  (
       <Box
         className={`is-paddingless is-clipped has-background-e-${digimon.attribute.toLowerCase()}`}
-        style={{...Styles.Container, width: size}}
+        style={{...Styles.Container, width: size, minWidth: size}}
       >
         <Box
           as={link ? 'a' : undefined}
           href={`#/digimon/${digimon.id}`}
           className="is-paddingless is-marginless has-background-grey-lighter is-clipped"
-          style={{ ...Styles.ImageBox, width: size }}
+          style={{ ...Styles.ImageBox, width: size, minWidth: size }}
         >
           <Image className={`is-${size}x${size}`}>
             <img src={digimon.image} alt="digimon"/>
@@ -83,7 +83,7 @@ export class DigimonCard extends PureComponent<Props> {
             )}
           </Image>
         </Box>
-        {statless && (
+        {!statless && (
           <div style={Styles.InfoRow}>
             <Icon style={Styles.BoxIcon}>
               <span className="fa-stack">
