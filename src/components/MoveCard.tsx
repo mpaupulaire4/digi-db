@@ -132,6 +132,7 @@ export class MoveCard extends PureComponent<Props, State> {
                   <DigimonCard
                     key={digimon.id}
                     statless
+                    link
                     size={64}
                     digimon={digimon}
                   />
