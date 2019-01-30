@@ -147,7 +147,8 @@ export class Move {
   description: string;
 
   async digimon(): Promise<Digimon[]> {
-    return []
+    const movelearns = await db.movelearn.where('move_id').equals(this.id).toArray()
+    return db.digimon.where('id').anyOf(movelearns.map(({ digimon_id }) => digimon_id )).toArray()
   }
 }
 
