@@ -7,6 +7,7 @@ type Props = {
   size?: 16 | 24 | 32 | 48 | 64 | 96 | 128,
   link?: boolean
   nameless?: boolean
+  statless?: boolean
 }
 
 const TypeMap: { [type: string]: string } = {
@@ -61,17 +62,17 @@ export class DigimonCard extends PureComponent<Props> {
     size: 96
   }
   render() {
-    const { digimon, link, size, nameless } = this.props
+    const { digimon, link, size, nameless, statless } = this.props
     return  (
       <Box
         className={`is-paddingless is-clipped has-background-e-${digimon.attribute.toLowerCase()}`}
-        style={{...Styles.Container, maxWidth: size}}
+        style={{...Styles.Container, width: size}}
       >
         <Box
           as={link ? 'a' : undefined}
           href={`#/digimon/${digimon.id}`}
           className="is-paddingless is-marginless has-background-grey-lighter is-clipped"
-          style={{ ...Styles.ImageBox, maxWidth: size }}
+          style={{ ...Styles.ImageBox, width: size }}
         >
           <Image className={`is-${size}x${size}`}>
             <img src={digimon.image} alt="digimon"/>
@@ -82,31 +83,33 @@ export class DigimonCard extends PureComponent<Props> {
             )}
           </Image>
         </Box>
-        <div style={Styles.InfoRow}>
-          <Icon style={Styles.BoxIcon}>
-            <span className="fa-stack">
-              <i className="fas fa-stack-2x fa-square"/>
-              <i className={`fa-stack-1x has-text-white ${TypeMap[digimon.type]}`}/>
-            </span>
-          </Icon>
-          <div style={Styles.SlotsRow} className={textMap[digimon.attribute]}>
-            <Icon style={SlotStyle} >
-              <i className={`${digimon.slots >= 1 ? 'fas' : 'far'} fa-square`}/>
+        {statless && (
+          <div style={Styles.InfoRow}>
+            <Icon style={Styles.BoxIcon}>
+              <span className="fa-stack">
+                <i className="fas fa-stack-2x fa-square"/>
+                <i className={`fa-stack-1x has-text-white ${TypeMap[digimon.type]}`}/>
+              </span>
             </Icon>
-            <Icon style={SlotStyle}>
-              <i className={`${digimon.slots >= 2 ? 'fas' : 'far'} fa-square`}/>
-            </Icon>
-            <Icon style={SlotStyle}>
-              <i className={`${digimon.slots == 3 ? 'fas' : 'far'} fa-square`}/>
+            <div style={Styles.SlotsRow} className={textMap[digimon.attribute]}>
+              <Icon style={SlotStyle} >
+                <i className={`${digimon.slots >= 1 ? 'fas' : 'far'} fa-square`}/>
+              </Icon>
+              <Icon style={SlotStyle}>
+                <i className={`${digimon.slots >= 2 ? 'fas' : 'far'} fa-square`}/>
+              </Icon>
+              <Icon style={SlotStyle}>
+                <i className={`${digimon.slots == 3 ? 'fas' : 'far'} fa-square`}/>
+              </Icon>
+            </div>
+            <Icon style={Styles.BoxIcon}>
+              <span className="fa-stack">
+                <i className="fas fa-stack-2x fa-square"/>
+                <span className="fas fa-stack-1x has-text-white" children={digimon.memory} />
+              </span>
             </Icon>
           </div>
-          <Icon style={Styles.BoxIcon}>
-            <span className="fa-stack">
-              <i className="fas fa-stack-2x fa-square"/>
-              <span className="fas fa-stack-1x has-text-white" children={digimon.memory} />
-            </span>
-          </Icon>
-        </div>
+        )}
       </Box>
     )
   }

@@ -5,9 +5,10 @@ import {
   Icon,
   Title,
   Subtitle,
-  Heading
+  Image
 } from 'bulma-styled-components'
 import { Move, Digimon } from '../Data/Objects'
+import { DigimonCard } from './DigimonCard'
 
 type Props = {
   move: Move
@@ -125,8 +126,17 @@ export class MoveCard extends PureComponent<Props, State> {
         </Card>
         {withDigimon && digimonOpen && digimon && digimon.length > 0 && (
           <Card>
-            <Card.Content>
-
+            <Card.Content style={{ display: 'flex', flexDirection: 'row', overflow: 'auto' }}>
+              {digimon.map((digimon) => {
+                return (
+                  <DigimonCard
+                    key={digimon.id}
+                    statless
+                    size={64}
+                    digimon={digimon}
+                  />
+                )
+              })}
             </Card.Content>
           </Card>
         )}
