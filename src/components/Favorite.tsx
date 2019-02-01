@@ -2,7 +2,7 @@ import React, { HTMLProps } from 'react'
 import { Icon } from 'bulma-styled-components'
 
 type Props = {
-  onClick: () => void,
+  onClick: (e:any) => void,
   fav?: boolean
 } & HTMLProps<any>
 

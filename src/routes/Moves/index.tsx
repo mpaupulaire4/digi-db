@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { MoveCard } from '../../components/MoveCard'
 import { HeaderSearch } from '../../components/Header'
 import { TagSelect } from '../../components/TagSelect'
+import { FilterIcon } from '../../components/FilterIcon'
 import { db } from '../../Data'
 import { Move } from '../../Data/Objects'
-import { Icon, Tags, Tag, Heading } from "bulma-styled-components";
 
 type State = {
   moves: Move[]
@@ -132,17 +132,6 @@ export class Moves extends Component<{},State> {
           ))}
         </div>
       </div>
-    )
-  }
-}
-
-class FilterIcon extends React.PureComponent<{ onClick: () => void }> {
-  render() {
-    const { onClick } = this.props
-    return (
-      <Icon onClick={onClick} style={{ cursor: 'pointer' }} className="has-text-primary">
-        <i className="fas fa-lg fa-sliders-h"/>
-      </Icon>
     )
   }
 }

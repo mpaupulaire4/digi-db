@@ -1,9 +1,11 @@
-import React, { FormEvent, ReactNode, HTMLProps } from 'react'
+import React, { ReactNode, HTMLProps } from 'react'
 import {
   Navbar,
   Tabs,
   Card,
-  Input
+  Input,
+  Field,
+  Control,
 } from 'bulma-styled-components'
 
 
@@ -36,13 +38,19 @@ export class Header extends React.Component<Props, State> {
   }
 }
 
-export function HeaderSearch({ Icon, children, ...props}: HeaderSearchProps) {
+export function HeaderSearch({ Icon, children, IInputLeft, IInputRight, ...props}: HeaderSearchProps) {
   return (
     <div style={{ height: 30 }}>
       <Card style={{ position: 'fixed', top: 52, left: 0, right: 0, zIndex: 100 }}>
         <Card.Header className="has-background-grey-lighter">
-          <Card.Header.Title>
-            <Input className="is-primary" {...props}/>
+          <Card.Header.Title as="div">
+            <Field style={{ flex: 1, position: 'relative' }}>
+              <Control /* className={`${IInputLeft ? 'has-icons-left' : ''} ${IInputRight ? 'has-icons-right' : ''}`} */>
+                <Input className="is-primary is-fullwidth" {...props}/>
+                {IInputLeft}
+                {IInputRight}
+              </Control>
+            </Field>
           </Card.Header.Title>
           {Icon && <Card.Header.Icon children={Icon}/>}
         </Card.Header>
@@ -54,5 +62,7 @@ export function HeaderSearch({ Icon, children, ...props}: HeaderSearchProps) {
 
 type HeaderSearchProps = {
   Icon?: ReactNode,
+  IInputLeft?: ReactNode,
+  IInputRight?: ReactNode,
   children?: ReactNode
 } & HTMLProps<any>
