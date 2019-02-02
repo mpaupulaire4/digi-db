@@ -13,6 +13,7 @@ type State = {
   favorites: boolean
   attrs: string[]
   types: string[]
+  stages: string[]
   filterOpen: boolean
 }
 
@@ -35,6 +36,18 @@ const Types = [
   'Free',
 ]
 
+const Stages = [
+  'Baby',
+  'In',
+  'Rookie',
+  'Champion',
+  'Ultimate',
+  'Mega',
+  'Ultra',
+  'Armor',
+  'None',
+]
+
 export class Home extends Component<{},State> {
   private static State: State = {
     digimon: [],
@@ -42,6 +55,7 @@ export class Home extends Component<{},State> {
     favorites: false,
     attrs: [],
     types: [],
+    stages: [],
     filterOpen: false
   }
 
@@ -80,13 +94,20 @@ export class Home extends Component<{},State> {
     })
   }
 
+  stageChange = (stages: string[]) => {
+    this.setState({
+      stages
+    })
+  }
+
   filter = (digimon: Digimon) => {
-    const { name, favorites, attrs, types } = this.state
+    const { name, favorites, attrs, types, stages } = this.state
     if (favorites && !digimon.favorite) return false
     if (name && !digimon.name.toLowerCase().includes(name)) return false
 
     if (attrs.length && !attrs.includes(digimon.attribute)) return false
     if (types.length && !types.includes(digimon.type)) return false
+    if (stages.length && !stages.includes(digimon.stage)) return false
 
     return true
   }
@@ -96,7 +117,7 @@ export class Home extends Component<{},State> {
   }
 
   render() {
-    const { favorites, name, attrs, types, filterOpen } = this.state
+    const { favorites, name, attrs, types, filterOpen, stages } = this.state
     return (
       <div>
         <HeaderSearch
@@ -119,6 +140,12 @@ export class Home extends Component<{},State> {
               label="Type"
               options={Types}
               onChange={this.typeChange}
+            />
+            <TagSelect
+              value={stages}
+              label="Stage"
+              options={Stages}
+              onChange={this.stageChange}
             />
           </div>
         )}
