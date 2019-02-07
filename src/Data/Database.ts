@@ -40,15 +40,8 @@ export class Database extends Dexie {
       digimon: `id,&name,stage,type,attribute,memory,slots,support_skill_id,*dedigivolve.to`,
       digivole: null,
     }).upgrade(async (tx) => {
-      const favs = (await tx.table('digimon').filter(({ favorite }) => favorite).toArray()).reduce((map, fav) =>{
-        map[fav.id] = true
-        return true
-      }, {})
       await tx.table('digimon').clear()
-      await tx.table('digimon').bulkPut(digimon.map((digi) => {
-        (digi as any).favorite = favs[digi.id] || false
-        return digi
-      }))
+      await tx.table('digimon').bulkPut(digimon)
     })
 
     this.digimon = this.table('digimon')
