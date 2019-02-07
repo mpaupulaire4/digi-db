@@ -26,11 +26,11 @@ export class Digimon extends React.Component<Props,State> {
   async componentDidMount() {
     const digimon = await db.digimon.get(parseInt(this.props.match.params.id))
     if (digimon) {
+      this.setState({ digimon })
       digimon.join().then(() => {
         this.setState({ digimon })
       })
     }
-    this.setState({ digimon })
   }
 
   async componentWillReceiveProps(props: Props) {
@@ -49,8 +49,8 @@ export class Digimon extends React.Component<Props,State> {
     if (!digimon) return
     await digimon.toggleFavorite()
     this.setState({ digimon })
-
   }
+
   changeStat(level: string) {
     return () => this.setState({ stats: this.state.stats === level ? undefined : level })
   }
@@ -128,45 +128,50 @@ export class Digimon extends React.Component<Props,State> {
           </Card>
         )}
         <br/>
+        {digimon.digivolveFrom && digimon.digivolveFrom.length > 0 && (
+          <Card>
+            <Card.Header className="has-background-primary">
+              <Card.Header.Title className="has-text-white-ter">
+                Digivolve From
+              </Card.Header.Title>
+              <Card.Header.Icon className="has-text-white-ter">
+                LV. {digimon.dedigivolve.level}
+              </Card.Header.Icon>
+            </Card.Header>
+            <Card.Header className="has-background-primary">
+              <Card.Header.Title className="has-text-white-ter is-size-7" style={{ paddingTop: 0 }}>
+                {digimon.dedigivolve.require}
+              </Card.Header.Title>
+            </Card.Header>
+            <Card.Content className="is-paddingless">
+              <div style={{ display: 'flex', flexDirection: 'row', overflow: 'auto', }}>
+                {digimon.digivolveFrom && digimon.digivolveFrom.map((data) => (
+                  <DigimonCard key={data.id} link digimon={data}/>
+                ))}
+                <div style={{ width: 100, height: '100%', color: 'white'}}>s</div>
+              </div>
+            </Card.Content>
+          </Card>
+        )}
+        <br/>
         <Box className="is-paddingless is-clipped">
           <Table className="is-bordered is-fullwidth">
             <thead className="has-background-primary">
               <tr>
-                <th className="has-text-white-ter">Digi. Fr.</th>
-                <th className="has-text-white-ter">Level</th>
-                <th className="has-text-white-ter">Requires</th>
-              </tr>
-            </thead>
-            <tbody>
-              {digimon.digivolveFrom && digimon.digivolveFrom.map((data) => (
-                <tr key={data.digimon.id}>
-                  <td>
-                    <DigimonCard link digimon={data.digimon}/>
-                  </td>
-                  <td>{data.level}</td>
-                  <td>{data.require}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Box>
-        <Box className="is-paddingless is-clipped">
-          <Table className="is-bordered is-fullwidth">
-            <thead className="has-background-primary">
-              <tr>
-                <th className="has-text-white-ter">Digi. To.</th>
-                <th className="has-text-white-ter">Level</th>
+                <th className="has-text-white-ter">Digivolve To</th>
                 <th className="has-text-white-ter">Requires</th>
               </tr>
             </thead>
             <tbody>
               {digimon.digivolveTo && digimon.digivolveTo.map((data) => (
-                <tr key={data.digimon.id}>
+                <tr key={data.id}>
                   <td>
-                    <DigimonCard link digimon={data.digimon}/>
+                    <DigimonCard link digimon={data}/>
                   </td>
-                  <td>{data.level}</td>
-                  <td>{data.require}</td>
+                  <td>
+                    <strong>Level</strong> {data.dedigivolve.level} <br/>
+                    {data.dedigivolve.require}
+                  </td>
                 </tr>
               ))}
             </tbody>

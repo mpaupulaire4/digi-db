@@ -1,24 +1,7 @@
 import { db } from './'
 
 
-export interface IDigimon {
-  id: number;
-  name: string;
-  stage: string;
-  type: string;
-  attribute: string;
-  memory: number;
-  slots: number;
-  image: string;
-  sprite: string;
-  favorite: boolean;
-  support_skill_id: number;
-  stats: {
-    [level: string]: IStats
-  };
-}
-
-export class Digimon implements IDigimon {
+export class Digimon {
   id: number;
   name: string;
   stage: string;
@@ -30,17 +13,19 @@ export class Digimon implements IDigimon {
   sprite: string;
   favorite: boolean = false;
   support_skill_id: number;
-  digivolveTo?: IDigivoleInfo[] = [];
-  digivolveFrom?: IDigivoleInfo[] = [];
-  moves?: IMoveInfo[];
-  supportSkill?: Support;
+  dedigivolve: {
+    to: number[]
+    level?: number
+    require?: string
+    mode_change?: number
+  }
   stats: {
     [level: string]: IStats
   };
-
-  constructor(digimon: IDigimon) {
-    Object.assign(this, digimon)
-  }
+  digivolveTo: Digimon[] = [];
+  digivolveFrom: Digimon[] = [];
+  moves?: IMoveInfo[];
+  supportSkill?: Support;
 
   async toggleFavorite() {
     this.favorite = !this.favorite
@@ -50,26 +35,20 @@ export class Digimon implements IDigimon {
   async join() {
     const [
       support_skill,
-      digivolveToData,
-      digivolveFromData,
+      digivolveTo,
+      digivolveFrom,
       movelearns
     ] = await Promise.all([
       db.supports.get(this.support_skill_id),
-      db.digivolve.where('from').equals(this.id).toArray(),
-      db.digivolve.where('to').equals(this.id).toArray(),
+      db.digimon.where('dedigivolve.to').equals(this.id).toArray(),
+      db.digimon.where('id').anyOf(this.dedigivolve.to).toArray(),
       db.movelearn.where('digimon_id').equals(this.id).sortBy('level'),
     ])
     this.supportSkill = support_skill
+    this.digivolveTo = digivolveTo || []
+    this.digivolveFrom = digivolveFrom || []
 
-    const [
-      moves,
-      digivolveTo,
-      digivolveFrom
-    ] = await Promise.all([
-      db.moves.where('id').anyOf(movelearns.map(({ move_id }) => move_id)).toArray(),
-      db.digimon.where('id').anyOf(digivolveToData.map(({ to }) => to)).toArray(),
-      db.digimon.where('id').anyOf(digivolveFromData.map(({ from }) => from)).toArray(),
-    ])
+    const moves = await db.moves.where('id').anyOf(movelearns.map(({ move_id }) => move_id)).toArray()
 
     const moveMap = moves.reduce((map, move) => {
       map[move.id] = move
@@ -82,44 +61,7 @@ export class Digimon implements IDigimon {
       }
     })
 
-    const digivolveToMap = digivolveToData.reduce((map, digi) => {
-      map[digi.to] = {
-        level: digi.level,
-        require: digi.require,
-      }
-      return map
-    }, {} as { [move_id: string]: {level:number, require:string} })
-    this.digivolveTo = digivolveTo.map((digi) => {
-      const ret = digivolveToMap[digi.id]
-      return {
-        level: ret.level,
-        require: ret.require,
-        digimon: digi
-      }
-    })
-
-    const digivolveFromMap = digivolveFromData.reduce((map, digi) => {
-      map[digi.from] = {
-        level: digi.level,
-        require: digi.require,
-      }
-      return map
-    }, {} as { [move_id: string]: {level:number, require:string} })
-    this.digivolveFrom = digivolveFrom.map((digi) => {
-      const ret = digivolveFromMap[digi.id]
-      return {
-        level: ret.level,
-        require: ret.require,
-        digimon: digi
-      }
-    })
   }
-}
-
-interface IDigivoleInfo {
-  level: number,
-  require: string,
-  digimon: Digimon,
 }
 
 interface IMoveInfo {

@@ -66,7 +66,7 @@ export class DigimonCard extends PureComponent<Props> {
     return  (
       <Box
         className={`is-paddingless is-clipped has-background-e-${digimon.attribute.toLowerCase()}`}
-        style={{...Styles.Container, width: size, minWidth: size}}
+        style={{...Styles.Container, width: size, minWidth: size, maxWidth: size}}
       >
         <Box
           as={link ? 'a' : undefined}
