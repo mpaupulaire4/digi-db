@@ -65,9 +65,8 @@ export class Home extends Component<{},State> {
   }
 
   async componentDidMount() {
-    await db.delete()
-    // const digimon = await db.digimon.toArray()
-    // this.setState({ digimon })
+    const digimon = await db.digimon.toArray()
+    this.setState({ digimon })
   }
 
   async componentWillUnmount() {
