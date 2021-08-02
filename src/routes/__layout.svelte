@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 import { page } from "$app/stores";
 import { slide } from 'svelte/transition';
 import cx from 'classnames'
@@ -8,10 +8,6 @@ let menuOpen = false
 const links = [
   {
     href: '/',
-    label: 'Home'
-  },
-  {
-    href: '/digimon',
     label: 'Digimon'
   },
   {
@@ -24,32 +20,26 @@ const links = [
   },
 ]
 
-$: current = links.find(({href}) => href === $page.path)
-
 </script>
 
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div>
+<div class="h-full flex flex-col">
   <nav class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <div class="flex items-center">
-          <div class="hidden md:block">
-            <div class="flex items-baseline space-x-4">
-              <!-- Currefnt: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              {#each links as link}
-              <a
-                href="{link.href}"
-                class="px-3 py-2 rounded-md text-sm font-medium {cx({
-                  "text-gray-300 hover:bg-gray-700 hover:text-white": $page.path !== link.href,
-                  "bg-gray-900 text-white": $page.path === link.href
-                })}"
-              >
-                {link.label}
-              </a>
-              {/each}
-            </div>
-          </div>
+        <div class="space-x-4 hidden md:flex items-center">
+          <!-- Currefnt: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          {#each links as link}
+          <a
+            href="{link.href}"
+            class="px-3 py-2 rounded-md text-sm font-medium {cx({
+              "text-gray-300 hover:bg-gray-700 hover:text-white": $page.path !== link.href,
+              "bg-gray-900 text-white": $page.path === link.href
+            })}"
+          >
+            {link.label}
+          </a>
+          {/each}
         </div>
 
         <div class="-mr-2 flex md:hidden">
@@ -118,15 +108,15 @@ $: current = links.find(({href}) => href === $page.path)
     {/if}
   </nav>
 
-  <header class="bg-white shadow-sm">
+  <header class="bg-white shadow z-10">
     <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
       <h1 class="text-lg leading-6 font-semibold text-gray-900">
-        {current.label}
+        Something Goes here
       </h1>
     </div>
   </header>
-  <main>
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+  <main class="overflow-y-auto bg-gray-200 h-full">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
       <slot></slot>
     </div>
   </main>
@@ -136,4 +126,7 @@ $: current = links.find(({href}) => href === $page.path)
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+#svelte {
+  height: 100vh;
+}
 </style>

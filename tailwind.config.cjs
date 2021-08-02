@@ -8,10 +8,25 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        'fire': '#e63900',
+        'water': '#1a8cff',
+        'plant': '#59b300',
+        'electric': '#ffff00',
+        'earth': '#996633',
+        'wind': '#00cc99',
+        'neutral': '#999999',
+        'light': '#fffae6',
+        'dark': '#330033',
+      }
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      ringColor: ['hover'],
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 }

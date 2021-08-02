@@ -1,6 +1,6 @@
 <script context="module">
-  export async function load({ fetch }) {
-    const res = await fetch('/digimon.json')
+  export async function load({ fetch, page }) {
+    const res = await fetch(`/digimon/${page.params.id}.json`)
 
     if (!res.ok) return
 
@@ -14,15 +14,11 @@
 
 <script lang="ts">
 import { fade } from 'svelte/transition'
-import DigiCard from '../components/DigiCard.svelte'
+import DigiCard from '../../components/DigiCard.svelte'
 
 export let digimon
 
 </script>
 <div transition:fade>
-  {#each digimon as digimon}
-  <a class="inline-block m-2 rounded-md" href="/digimon/{digimon.id}">
     <DigiCard digimon="{digimon}"/>
-  </a>
-  {/each}
 </div>
