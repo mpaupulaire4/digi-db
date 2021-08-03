@@ -18,8 +18,8 @@
     rounded-md
     overflow-hidden
     relative
-    w-32
-    h-32
+    w-24
+    h-24
   "
 >
 
@@ -35,6 +35,9 @@
       opacity-70
       font-sans
       font-semibold
+      overflow-ellipsis
+      whitespace-nowrap
+      overflow-hidden
       text-sm
       px-2
     "
