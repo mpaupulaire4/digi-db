@@ -15,10 +15,13 @@
 <script lang="ts">
 import { fade } from 'svelte/transition'
 import DigiCard from '../../components/DigiCard.svelte'
+import Page from '../../components/Page.svelte'
 
 export let digimon
 
 </script>
-<div transition:fade>
+<Page>
+  <div transition:fade>
     <DigiCard digimon="{digimon}"/>
-</div>
+  </div>
+</Page>

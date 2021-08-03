@@ -24,7 +24,7 @@ const links = [
 
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="h-full flex flex-col">
-  <nav class="bg-gray-800">
+  <nav class="bg-gray-800 shadow z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="space-x-4 hidden md:flex items-center">
@@ -108,18 +108,7 @@ const links = [
     {/if}
   </nav>
 
-  <header class="bg-white shadow z-10">
-    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-      <h1 class="text-lg leading-6 font-semibold text-gray-900">
-        Something Goes here
-      </h1>
-    </div>
-  </header>
-  <main class="overflow-y-auto bg-gray-200 h-full">
-    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-      <slot></slot>
-    </div>
-  </main>
+  <slot></slot>
 </div>
 
 <style global>
