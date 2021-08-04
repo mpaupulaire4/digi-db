@@ -5,16 +5,10 @@ import DigiCard from '../components/DigiCard.svelte'
 import Page from '../components/Page.svelte'
 import SearchFilter from '../components/SearchFilter.svelte'
 import ButtonSelect from '../components/ButtonSelect.svelte'
-import Database from '../lib/Data/Database'
+import { DigimonStore } from '../lib/Data/Database'
 
 let digimon = []
 let open = false
-
-Database.open().then(async () => {
-  await Database.digimon.orderBy('id').toArray().then((data) => {
-    digimon = data
-  })
-})
 
 let search = ''
 
@@ -22,23 +16,48 @@ let type_filter: Set<string> = new Set();
 let attribute_filter: Set<string> = new Set();
 let stage_filter: Set<string> = new Set();
 
-$: has_filters = attribute_filter.size || type_filter.size || stage_filter.size
-$: filtered_digimon = has_filters ? digimon.filter((digimon) => {
-  if (search && !digimon.name.toLowerCase().includes(search.toLowerCase())) return false
+$: query = get_query(attribute_filter, type_filter, stage_filter)
 
-  if (attribute_filter.size && !attribute_filter.has(digimon.attribute)) return false
-  if (type_filter.size && !type_filter.has(digimon.type)) return false
-  if (stage_filter.size && !stage_filter.has(digimon.stage)) return false
-  return true
-}) : digimon
+function get_query(attribute_filter, type_filter, stage_filter) {
+  if (
+      !attribute_filter.size
+      && !type_filter.size
+      && !stage_filter.size
+  ) return undefined
+  const filters = {}
+  if (attribute_filter.size) {
+    filters.attribute = {
+      "$in": attribute_filter
+    }
+  }
+
+  if (type_filter.size) {
+    filters.type = {
+      "$in": type_filter
+    }
+  }
+
+  if (stage_filter.size) {
+    filters.stage = {
+      "$in": stage_filter
+    }
+  }
+
+  return filters
+}
+
+$: queried_digimon = DigimonStore.where(query)
+$: filtered_digimon = !search ? queried_digimon : queried_digimon.filter(
+  d => d.name.toLowerCase().includes(search.toLowerCase())
+)
 
 
 function clear() {
   attribute_filter.clear()
-  attribute_filter = attribute_filter
   type_filter.clear()
-  type_filter = type_filter
   stage_filter.clear()
+  attribute_filter = attribute_filter
+  type_filter = type_filter
   stage_filter = stage_filter
 }
 
@@ -49,8 +68,8 @@ function clear() {
       bind:value="{search}"
       on:click="{() => open = !open }"
       on:clear="{clear}"
-      clearable="{has_filters}"
-      active="{has_filters}"
+      clearable="{!!query}"
+      active="{!!query}"
     />
     {#if open}
     <ul transition:slide>
@@ -106,8 +125,12 @@ function clear() {
     {/if}
   </div>
   <div>
-    {#each filtered_digimon as digimon (digimon.id)}
-    <a class="inline-block m-2 rounded-md" href="/digimon/{digimon.id}" animate:flip="{{ duration: 200 }}" transition:scale>
+    {#each filtered_digimon as digimon}
+    <a
+      class="inline-block m-2 rounded-md"
+      href="/digimon/{digimon.id}"
+      transition:scale
+    >
       <DigiCard digimon="{digimon}"/>
     </a>
     {/each}

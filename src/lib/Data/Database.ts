@@ -1,46 +1,77 @@
-import Dexie from "dexie";
 import data from './data.json';
 import type { Area, Digimon, Item, Skill, Support } from './types';
+import { ObjectStore } from '../Store'
 
-export class Database extends Dexie {
-  digimon: Dexie.Table<Digimon, number>;
-  skills: Dexie.Table<Skill, number>;
-  supports: Dexie.Table<Support, number>;
-  items: Dexie.Table<Item, number>;
-  areas: Dexie.Table<Area, number>;
+export const DigimonStore = new ObjectStore<Digimon, number>('digimon', [
+  {
+    name: 'type',
+    hash: true,
+  },
+  {
+    name: 'attribute',
+    hash: true,
+  },
+  {
+    name: 'stage',
+    hash: true,
+  },
+  {
+    name: 'support_id',
+    hash: true,
+  },
+  {
+    name: 'digivolve_to',
+    hash: true,
+  },
+], 'id')
 
-  constructor() {
-    super('digimon-database', {
-      autoOpen: true,
-    })
-    this.version(1).stores({
-      digimon: 'id, type, attribute, stage, support_id, *digivolve_to',
-      skills: 'id, type, attribute',
-      supports: 'id',
-      items: 'id, category, *dropped_by_digimon, *sold_in_areas',
-      areas: 'id, zone_id, *subareas',
-    })
+export const SkillStore = new ObjectStore<Skill, number>('skills', [
+  {
+    name: 'type',
+    hash: true,
+  },
+  {
+    name: 'attribute',
+    hash: true,
+  },
+], 'id')
 
-    this.digimon = this.table('digimon')
-    this.skills = this.table('skills')
-    this.supports = this.table('supports')
-    this.items = this.table('items')
-    this.areas = this.table('areas')
+export const SupportStore = new ObjectStore<Support, number>('supports', [], 'id')
 
-    this.on('populate', (t) => {
-      return Promise.all([
-        t.table('digimon').bulkAdd(data.digimon),
-        t.table('skills').bulkAdd(data.skills),
-        t.table('supports').bulkAdd(data.supports),
-        t.table('areas').bulkAdd(data.areas),
-        t.table('items').bulkAdd(data.items),
-      ])
-    })
-    this.open()
-  }
-}
+export const AreaStore = new ObjectStore<Area, number>('areas', [
+  {
+    name: 'type',
+    hash: true,
+  },
+  {
+    name: 'zone_id',
+    hash: true,
+  },
+  {
+    name: 'subareas',
+    hash: true,
+  },
+], 'id')
 
+export const ItemStore = new ObjectStore<Item, number>('items', [
+  {
+    name: 'category',
+    hash: true,
+  },
+  {
+    name: 'dropped_by_digimon',
+    hash: true,
+  },
+  {
+    name: 'sold_in_areas',
+    hash: true,
+  },
+], 'id')
 
-const db = new Database()
-
-export default db;
+export const loaded = Promise.all<any>([
+  ...data.digimon.map((d) => DigimonStore.insert(d as any as Digimon)),
+  ...data.skills.map((d) => SkillStore.insert(d as any as Skill)),
+  ...data.supports.map((d) => SupportStore.insert(d as any as Support)),
+  ...data.areas.map((d) => AreaStore.insert(d as any as Area)),
+  ...data.items.map((d) => ItemStore.insert(d as any as Item)),
+])
