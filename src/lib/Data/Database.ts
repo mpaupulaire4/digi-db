@@ -75,3 +75,5 @@ export const loaded = Promise.all<any>([
   ...data.areas.map((d) => AreaStore.insert(d as any as Area)),
   ...data.items.map((d) => ItemStore.insert(d as any as Item)),
 ])
+
+export const max_stats = data.max_stats

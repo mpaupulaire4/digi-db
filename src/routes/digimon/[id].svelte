@@ -3,7 +3,7 @@ import { fade } from 'svelte/transition'
 import { page } from '$app/stores';
 import DigiCard from '../../components/DigiCard.svelte'
 import Page from '../../components/Page.svelte'
-import { DigimonStore, SkillStore, SupportStore } from '$lib/Data/Database'
+import { DigimonStore, SkillStore, SupportStore, max_stats } from '$lib/Data/Database'
 
 let id = parseInt($page.params.id)
 
@@ -23,15 +23,7 @@ $: digivolve_from = DigimonStore.where({
 
 $: support_skill = SupportStore.get(digimon.support_id)
 
-const max = {
-  hp: 2670,
-  sp: 267,
-  atk: 382,
-  int: 297,
-  def: 999,
-  spd: 282,
-  total: 3608
-}
+const max = max_stats
 
 </script>
 <Page>
