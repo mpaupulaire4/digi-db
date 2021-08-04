@@ -5,7 +5,7 @@ import DigiCard from '../components/DigiCard.svelte'
 import Page from '../components/Page.svelte'
 import SearchFilter from '../components/SearchFilter.svelte'
 import ButtonSelect from '../components/ButtonSelect.svelte'
-import { DigimonStore } from '../lib/Data/Database'
+import { DigimonStore } from '$lib/Data/Database'
 
 let digimon = []
 let open = false
@@ -77,12 +77,17 @@ function clear() {
         <div class="capitalize mb-2 text-sm">Stage</div>
         <ButtonSelect
           options="{[
-            'Training 1',
-            'Training 2',
-            'Rookie',
-            'Champion',
-            'Ultimate',
-            'Mega',
+            'baby',
+            'trainee',
+            'rookie',
+          ]}"
+          bind:value="{stage_filter}"
+        />
+        <ButtonSelect
+          options="{[
+            'champion',
+            'ultimate',
+            'mega',
           ]}"
           bind:value="{stage_filter}"
         />

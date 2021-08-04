@@ -32,6 +32,10 @@ export class ObjectStore<T = any, K = any> {
     ObjectStore.stores[this.name] = this
   }
 
+  get(key: K) {
+    return this.pk.get(key)
+  }
+
   async insert(doc: T): Promise<T> {
     let i = 0
     try {

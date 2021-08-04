@@ -1,23 +1,11 @@
-<script context="module">
-  export async function load({ fetch, page }) {
-    const res = await fetch(`/digimon/${page.params.id}.json`)
-
-    if (!res.ok) return
-
-    return {
-      props: {
-        digimon: await res.json()
-      }
-    }
-  }
-</script>
-
 <script lang="ts">
 import { fade } from 'svelte/transition'
+import { page } from '$app/stores';
 import DigiCard from '../../components/DigiCard.svelte'
 import Page from '../../components/Page.svelte'
+import { DigimonStore } from '$lib/Data/Database'
 
-export let digimon
+let digimon = DigimonStore.get(parseInt($page.params.id))
 
 </script>
 <Page>
