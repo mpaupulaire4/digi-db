@@ -9,19 +9,21 @@
     wind: 'text-wind',
     earth: 'text-earth',
     electric: 'text-electric',
+    none: 'text-white',
   }
 </script>
 
 <script>
 export let type = 'free'
-export let attribute = 'neutral'
+export let attribute = 'none'
+
 let className = ''
 
 export {
   className as class
 }
 </script>
-<div class="bg-gray-600 opacity-70 inline-block rounded-md p-1 {AttributeMap[attribute]}">
+<div class="bg-gray-600 inline-block rounded-md p-1 {AttributeMap[attribute]}">
   {#if type === 'virus'}
   <svg
     aria-hidden="true"

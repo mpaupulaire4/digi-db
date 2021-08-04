@@ -1,4 +1,4 @@
-export interface MoveLearn {
+export interface SkillLearn {
   move_id: number
   level: number
 }
@@ -45,7 +45,7 @@ export interface Digimon {
     icon: string
     in_game: string
   },
-  learns: MoveLearn[]
+  learns: SkillLearn[]
   digivolve_condition?: DigivolveCondition
   digivolve_to: number[]
   spawns: Spawn[]
