@@ -1,4 +1,4 @@
-import BTree, { IMap } from "sorted-btree"
+import { BTree } from "./BTree/Tree"
 import { get_getter_fn } from "./utils"
 
 type Indexable = string | number | null | undefined | Array<string | number | null | undefined>
@@ -8,6 +8,14 @@ function isIndexable(o: any): o is Indexable {
   || typeof o === 'string'
   || typeof o === 'number'
   || Array.isArray(o)
+}
+
+interface IMap<K, V> {
+  readonly size: number
+  set(k: K, v: V): void
+  get(k: K): V | undefined
+  has(k: K): boolean
+  delete(k: K): boolean
 }
 
 export interface IndexConfig {
@@ -202,7 +210,7 @@ abstract class BaseIndex<T>
 export class Index<T> extends BaseIndex<T>
   implements IIndex<T>
 {
-  protected _tree: BTree<Indexable, Set<T>> = new BTree()
+  protected _tree: BTree<Indexable, Set<T>> = new BTree(50)
 
   where(clause: WhereClause, set: Set<T> = new Set<T>()) {
     if (isIndexable(clause)) {
@@ -212,7 +220,7 @@ export class Index<T> extends BaseIndex<T>
         metas.forEach(meta => set.add(meta))
       }
     } else if ('$between' in clause) {
-      this._tree.forRange(clause.$between[0], clause.$between[1], true, (_, v: Set<T>) => {
+      this._tree.forRange(clause.$between[0], clause.$between[1], (v: Set<T>) => {
         v.forEach(meta => set.add(meta))
       })
     } else if ('$in' in clause) {
