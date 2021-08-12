@@ -8,6 +8,10 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      transitionProperty: {
+        'height': 'height',
+        'width': 'width',
+      },
       colors: {
         'fire': '#e63900',
         'water': '#1a8cff',

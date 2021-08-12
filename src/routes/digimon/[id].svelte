@@ -3,9 +3,11 @@ import { fade } from 'svelte/transition'
 import { page } from '$app/stores';
 import DigiCard from '../../components/DigiCard.svelte'
 import Page from '../../components/Page.svelte'
+import StatsCard from '../../components/StatsCard.svelte'
 import { DigimonStore, SkillStore, SupportStore, max_stats } from '$lib/Data/Database'
 
-let id = parseInt($page.params.id)
+let id = parseInt($page.params.id);
+let stat_type = 0;
 
 $: digimon = DigimonStore.get(id)
 
@@ -24,6 +26,11 @@ $: digivolve_from = DigimonStore.where({
 $: support_skill = SupportStore.get(digimon.support_id)
 
 const max = max_stats
+const stat_types = [
+  'Base',
+  'Level 50',
+  'Level 99',
+]
 
 </script>
 <Page>
@@ -47,40 +54,17 @@ const max = max_stats
         <div class="flex-shrink-0 mb-0 mr-4 block">
           <DigiCard simple="{false}" digimon="{digimon}"/>
         </div>
-        <div class="overflow-hidden">
-          <table class="table-fixed w-full bg-gray-300 rounded-lg">
-            <tbody>
-              {#each ['hp', 'sp', 'atk', 'int', 'def', 'spd', 'total'] as stat}
-              <tr class="border-b-4 border-gray-100">
-                <th class="uppercase w-16 text-sm font-semibol">{stat}</th>
-                <td
-                  style
-                  class="
-                    bg-gray-500
-                    rounded-full
-                    overflow-hidden
-                    text-sm
-                    text-gray-200
-                    font-extrabold
-                    font-mono
-                  "
-                >
-                  <span
-                    style="width: {Math.round(digimon.stats[stat][2] * 100 / max[stat])}%;"
-                    class="bg-gray-700 inline-block"
-                  >
-                    <div class="pl-5 w-14 text-right">{digimon.stats[stat][2]}</div>
-                  </span>
-                </td>
-              </tr>
-              {/each}
-            </tbody>
-          </table>
-        </div>
       </div>
-      <p class="mt-1 rounded-md bg-gray-200 text-gray-800 p-2 shadow-inner">{digimon.description}</p>
     </div>
 
+    <div
+      class="shadow-md bg-white rounded-md mt-10 p-4"
+    >
+      <p class="rounded-md bg-gray-200 text-gray-800 p-4 shadow-inner">{digimon.description}</p>
+    </div>
+
+
+    <StatsCard stats="{digimon.stats}"/>
 
   </div>
 </Page>
