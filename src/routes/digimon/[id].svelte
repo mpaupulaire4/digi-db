@@ -63,8 +63,9 @@ const stat_types = [
       <p class="rounded-md bg-gray-200 text-gray-800 p-4 shadow-inner">{digimon.description}</p>
     </div>
 
-
-    <StatsCard stats="{digimon.stats}"/>
+    <div class="mt-8">
+      <StatsCard stats="{digimon.stats}"/>
+    </div>
 
   </div>
 </Page>
