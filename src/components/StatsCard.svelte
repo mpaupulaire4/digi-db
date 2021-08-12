@@ -47,8 +47,9 @@
       <span
         style="width: {Math.round(stats[stat][stat_type] * 100 / max[stat])}%;"
         class="bg-gray-700 inline-block h-full rounded-r-md transition-width duration-500"
-      />
-      <div class="flex-1 mr-2 text-right">{stats[stat][stat_type]}</div>
+      >
+        <pre class="ml-2 mt-0.5">{stats[stat][stat_type].toString().padStart(4, ' ')}</pre>
+      </span>
     </div>
   </div>
   {/each}
