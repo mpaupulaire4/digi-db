@@ -1,5 +1,7 @@
 <script>
 import { page } from "$app/stores";
+import { setContext } from "svelte";
+import { writable } from "svelte/store";
 import { slide } from 'svelte/transition';
 import cx from 'classnames'
 
@@ -20,9 +22,11 @@ const links = [
   },
 ]
 
+const title = writable('test')
+setContext('title',  title)
+
 </script>
 
-<!-- This example requires Tailwind CSS v2.0+ -->
 <div class="h-full flex flex-col">
   <nav class="bg-gray-800 shadow z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,7 +46,7 @@ const links = [
           {/each}
         </div>
 
-        <div class="-mr-2 flex md:hidden">
+        <div class="-mr-2 flex md:hidden items-center">
           <!-- Mobile menu button -->
           <button
             on:click="{() => menuOpen = !menuOpen}"
@@ -83,6 +87,17 @@ const links = [
               />
             </svg>
           </button>
+          <span
+            class="
+              text-lg
+              font-semibold
+              text-white
+              capitalize
+              ml-1
+            "
+          >
+            {$title}
+          </span>
         </div>
       </div>
     </div>

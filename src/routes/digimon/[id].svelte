@@ -1,14 +1,17 @@
 <script lang="ts">
 import { fade } from 'svelte/transition'
+import { getContext } from 'svelte'
 import { page } from '$app/stores';
 import DigiCard from '../../components/DigiCard.svelte'
 import Page from '../../components/Page.svelte'
 import StatsCard from '../../components/StatsCard.svelte'
 import DigiRow from '../../components/DigiRow.svelte'
-import { DigimonStore, SkillStore, SupportStore, max_stats } from '$lib/Data/Database'
+import { DigimonStore, SkillStore, SupportStore } from '$lib/Data/Database'
 
 let id = parseInt($page.params.id);
 let stat_type = 0;
+
+const title = getContext('title')
 
 $: digimon = DigimonStore.get(id)
 
@@ -24,16 +27,16 @@ $: digivolve_from = DigimonStore.where({
   digivolve_to: digimon.id
 })
 
-$: support_skill = SupportStore.get(digimon.support_id)
+$: support = SupportStore.get(digimon.support_id)
 
-const max = max_stats
-const stat_types = [
-  'Base',
-  'Level 50',
-  'Level 99',
-]
+$: {
+  title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
+}
 
 </script>
+<svelte:head>
+  <title>{digimon.name}</title>
+</svelte:head>
 <Page>
   <svelte:fragment
     slot="header"
@@ -51,7 +54,16 @@ const stat_types = [
   <div>
 
     <div
-      class="shadow-md bg-white rounded-md mt-10 p-4"
+      class="shadow-md bg-white rounded-md p-4"
+    >
+      <div class="flex justify-between font-semibold">
+        <span>{support.name}</span>
+        <span class="font-mono">#{support.id}</span>
+      </div>
+      <p class="text-gray-800 mt-1 text-sm font-medium">{support.description}</p>
+    </div>
+    <div
+      class="shadow-md bg-white rounded-md mt-6 p-4"
     >
       <p class="rounded-md bg-gray-200 text-gray-800 p-4 shadow-inner">{digimon.description}</p>
     </div>
