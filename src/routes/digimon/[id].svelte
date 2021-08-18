@@ -5,6 +5,7 @@ import { page } from '$app/stores';
 import DigiCard from '../../components/DigiCard.svelte'
 import Page from '../../components/Page.svelte'
 import StatsCard from '../../components/StatsCard.svelte'
+import SupportCard from '../../components/SupportCard.svelte'
 import DigiRow from '../../components/DigiRow.svelte'
 import { DigimonStore, SkillStore, SupportStore } from '$lib/Data/Database'
 
@@ -53,15 +54,7 @@ $: {
 
   <div>
 
-    <div
-      class="shadow-md bg-white rounded-md p-4"
-    >
-      <div class="flex justify-between font-semibold">
-        <span>{support.name}</span>
-        <span class="font-mono">#{support.id}</span>
-      </div>
-      <p class="text-gray-800 mt-1 text-sm font-medium">{support.description}</p>
-    </div>
+    <SupportCard support="{support}"/>
     <div
       class="shadow-md bg-white rounded-md mt-6 p-4"
     >
