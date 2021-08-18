@@ -7,6 +7,7 @@ import Page from '../../components/Page.svelte'
 import StatsCard from '../../components/StatsCard.svelte'
 import SupportCard from '../../components/SupportCard.svelte'
 import DigiRow from '../../components/DigiRow.svelte'
+import SkillCard from '../../components/SkillCard.svelte'
 import { DigimonStore, SkillStore, SupportStore } from '$lib/Data/Database'
 
 let id = parseInt($page.params.id);
@@ -63,6 +64,12 @@ $: {
 
     <div class="mt-8">
       <StatsCard stats="{digimon.stats}"/>
+    </div>
+
+    <div class="mt-8 space-y-2">
+    {#each skills as skill, i}
+      <SkillCard skill="{skill}" level="{digimon.learns[i].level}"/>
+    {/each}
     </div>
 
   </div>

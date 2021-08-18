@@ -60,7 +60,7 @@
     <img class="h-10 w-10" src="{skill.icon}" alt="skill tyoe">
   </div>
   <div class="flex-1 min-w-0">
-    <a href="/skills/{skill.id}" class="focus:outline-none">
+    <a href="?skills={skill.id}" class="focus:outline-none">
       <p class="font-medium text-gray-900 flex items-center justify-between">
         <span>{skill.name}</span>
       {#if level !== undefined}
