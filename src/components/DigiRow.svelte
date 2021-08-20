@@ -17,7 +17,7 @@
   </div>
   <div class="bg-gray-500 p-2  rounded-l-xl">
     <img
-      src="{digimon.images.icon}"
+      src="/{digimon.images.icon}"
       alt="{digimon.name}"
       class="w-18 h-18 rounded-xl overflow-hidden"
     />

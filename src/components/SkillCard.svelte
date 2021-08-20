@@ -57,7 +57,7 @@
       </path>
     </svg>
     {/if}
-    <img class="h-10 w-10" src="{skill.icon}" alt="skill tyoe">
+    <img class="h-10 w-10" src="/{skill.icon}" alt="skill tyoe">
   </div>
   <div class="flex-1 min-w-0">
     <a href="?skills={skill.id}" class="focus:outline-none">

@@ -33,7 +33,7 @@
 >
 
   <img
-    src="{digimon.images.icon}"
+    src="/{digimon.images.icon}"
     alt="{digimon.name}"
     class="{!simple ? 'w-32 h-32' : 'w-24 h-24'} rounded-md overflow-hidden"
   />
