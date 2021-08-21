@@ -23,7 +23,7 @@ $: filtered_skills = !search ? queried_skills : queried_skills.filter(
     />
   </div>
   <div>
-    <div role="list" class="mt-1 grid grid-cols-1 gap-5 sm:gap-6">
+    <div role="list" class="space-y-2">
     {#each filtered_skills as skill}
       <SupportCard support="{skill}"/>
     {:else}

@@ -35,6 +35,15 @@ $: {
   title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
 }
 
+let desc;
+
+$: if (desc) {
+  console.log();
+  console.log(desc.scrollHeight);
+  console.log(desc.clientHeight);
+  console.log();
+}
+
 </script>
 <svelte:head>
   <title>{digimon.name}</title>
@@ -53,18 +62,18 @@ $: {
     <DigiRow digimon="{digimon}"/>
   </svelte:fragment>
 
-  <div class="space-y-6">
+  <div class="space-y-4">
 
-    <SupportCard support="{support}"/>
     <div
-      class="shadow-md bg-white rounded-md p-4"
+      class="bg-white rounded-md p-4 shadow-inner"
+      bind:this="{desc}"
     >
-      <p class="rounded-md bg-gray-200 text-gray-800 p-4 shadow-inner">{digimon.description}</p>
+      <p class="text-gray-800 text-sm text-center">{digimon.description}</p>
     </div>
 
-    <div class="">
-      <StatsCard stats="{digimon.stats}"/>
-    </div>
+    <SupportCard support="{support}" inner />
+
+    <StatsCard stats="{digimon.stats}"/>
 
     <div class="space-y-2">
     {#each skills as skill, i}

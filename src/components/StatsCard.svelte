@@ -15,7 +15,7 @@
 </script>
 
 
-<div class="overflow-hidden px-6 pb-6 pt-4 bg-white rounded-md shadow-md">
+<div class="overflow-hidden px-4 pb-4 pt-2 bg-white rounded-md shadow-inner">
   <div class="flex items-center justify-center py-2">
     <nav class="flex space-x-4" aria-label="Tabs">
       <!-- Current: "bg-indigo-100 text-indigo-700", Default: "text-gray-500 hover:text-gray-700" -->

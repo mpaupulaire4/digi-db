@@ -1,13 +1,13 @@
 <script>
   export let support;
+  export let inner = false
 </script>
 
 <div
-  class="shadow-md bg-white rounded-md p-4"
+  class="{inner ? 'shadow-inner' : 'shadow-md'} bg-white rounded-md px-4 py-2 space-y-1"
 >
-  <div class="flex justify-between font-semibold">
-    <span>{support.name}</span>
-    <span class="font-mono">#{support.id}</span>
+  <div class="font-semibold text-center">
+    {support.name}
   </div>
-  <p class="text-gray-800 mt-1 text-sm font-medium">{support.description}</p>
+  <p class="text-gray-800 text-sm font-medium text-center">{support.description}</p>
 </div>

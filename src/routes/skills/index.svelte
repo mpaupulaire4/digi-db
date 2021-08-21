@@ -13,15 +13,13 @@ let search = ''
 
 let type_filter: Set<string> = new Set();
 let attribute_filter: Set<string> = new Set();
-let stage_filter: Set<string> = new Set();
 
-$: query = get_query(attribute_filter, type_filter, stage_filter)
+$: query = get_query(attribute_filter, type_filter)
 
-function get_query(attribute_filter, type_filter, stage_filter) {
+function get_query(attribute_filter, type_filter) {
   if (
       !attribute_filter.size
       && !type_filter.size
-      && !stage_filter.size
   ) return undefined
   const filters = {}
   if (attribute_filter.size) {
@@ -33,12 +31,6 @@ function get_query(attribute_filter, type_filter, stage_filter) {
   if (type_filter.size) {
     filters.type = {
       "$in": type_filter
-    }
-  }
-
-  if (stage_filter.size) {
-    filters.stage = {
-      "$in": stage_filter
     }
   }
 
@@ -54,10 +46,8 @@ $: filtered_skills = !search ? queried_skills : queried_skills.filter(
 function clear() {
   attribute_filter.clear()
   type_filter.clear()
-  stage_filter.clear()
   attribute_filter = attribute_filter
   type_filter = type_filter
-  stage_filter = stage_filter
 }
 
 </script>
@@ -73,28 +63,9 @@ function clear() {
     {#if open}
     <ul transition:slide>
       <li class="py-2">
-        <div class="capitalize mb-2 text-sm">Stage</div>
-        <ButtonSelect
-          options="{[
-            'baby',
-            'trainee',
-            'rookie',
-          ]}"
-          bind:value="{stage_filter}"
-        />
-        <ButtonSelect
-          options="{[
-            'champion',
-            'ultimate',
-            'mega',
-          ]}"
-          bind:value="{stage_filter}"
-        />
-      </li>
-      <li class="py-2">
         <div class="capitalize mb-2 text-sm">Type</div>
         <ButtonSelect
-          options="{['free', 'data', 'virus', 'vaccine']}"
+          options="{['support', 'physical', 'magic']}"
           bind:value="{type_filter}"
         />
       </li>
@@ -129,7 +100,7 @@ function clear() {
     {/if}
   </div>
   <div>
-    <div role="list" class="mt-1 grid grid-cols-1 gap-5 sm:gap-6">
+    <div role="list" class="space-y-2">
     {#each filtered_skills as skill}
       <SkillCard skill="{skill}"/>
     {/each}

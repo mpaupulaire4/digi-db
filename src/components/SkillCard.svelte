@@ -5,10 +5,12 @@
   ];
 </script>
 <script>
+  import { slide } from 'svelte/transition'
   export let skill;
   export let level = undefined;
 
   let open = false
+
 </script>
 
 
@@ -60,7 +62,7 @@
     <img class="h-10 w-10" src="/{skill.icon}" alt="skill tyoe">
   </div>
   <div class="flex-1 min-w-0">
-    <a href="?skills={skill.id}" class="focus:outline-none">
+    <button on:click="{() => open = !open}" class="block focus:outline-none transition-height duration-100 w-full">
       <p class="font-medium text-gray-900 flex items-center justify-between">
         <span>{skill.name}</span>
       {#if level !== undefined}
@@ -69,16 +71,19 @@
       </p>
       <div class="mt-1 flex space-x-2">
       {#each chips as chip}
-        <span class="inline-flex items-center h-6 flex-1">
-          <span class="px-2 inline-flex items-center justify-center rounded-l-lg text-xs font-medium bg-gray-500 text-gray-100 uppercase h-full">
+        <span class="inline-flex items-center flex-1">
+          <span class="px-2 py-0.5 inline-flex items-center justify-center rounded-l-lg text-xs font-medium bg-gray-500 text-gray-100 uppercase h-full">
             {chip}
           </span>
-          <span class="px-2 inline-flex items-center justify-center rounded-r-lg text-xs font-semibold tracking-wider bg-gray-300 text-gray-800 h-full flex-1">
+          <span class="px-2 py-0.5 inline-flex items-center justify-center rounded-r-lg text-xs font-semibold tracking-wider bg-gray-300 text-gray-800 h-full flex-1">
             {skill[chip]}
           </span>
         </span>
       {/each}
       </div>
-    </a>
+    </button>
+    {#if open}
+      <p transition:slide>{skill.description}</p>
+    {/if}
   </div>
 </div>
