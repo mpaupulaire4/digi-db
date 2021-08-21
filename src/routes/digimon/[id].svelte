@@ -8,10 +8,11 @@ import StatsCard from '../../components/StatsCard.svelte'
 import SupportCard from '../../components/SupportCard.svelte'
 import DigiRow from '../../components/DigiRow.svelte'
 import SkillCard from '../../components/SkillCard.svelte'
+import Tabs from '../../components/Tabs.svelte'
 import { DigimonStore, SkillStore, SupportStore } from '$lib/Data/Database'
 
 let id = parseInt($page.params.id);
-let stat_type = 0;
+let tab = 'Details'
 
 const title = getContext('title')
 
@@ -31,42 +32,25 @@ $: digivolve_from = DigimonStore.where({
 
 $: support = SupportStore.get(digimon.support_id)
 
-$: {
-  title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
-}
+$: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
 
-let desc;
-
-$: if (desc) {
-  console.log();
-  console.log(desc.scrollHeight);
-  console.log(desc.clientHeight);
-  console.log();
-}
 
 </script>
 <svelte:head>
   <title>{digimon.name}</title>
 </svelte:head>
 <Page>
-  <svelte:fragment
+  <div
     slot="header"
+    class="flex-1"
   >
-    <!-- <h1 class="text-lg leading-6 font-bold text-gray-900 capitalize tracking-wide">
-      <span class="font-mono font-medium">
-      #{digimon.id.toString().padStart(3, '0')}
-      </span>
-      {digimon.name} -
-      <span class="font-mono font-medium">{digimon.stage}</span>
-    </h1> -->
     <DigiRow digimon="{digimon}"/>
-  </svelte:fragment>
-
+    <Tabs tabs="{['Skills', 'Details', 'Evolution']}" class="mt-2 -mb-2" bind:value="{tab}"/>
+  </div>
+{#if tab === 'Details'}
   <div class="space-y-4">
-
     <div
       class="bg-white rounded-md p-4 shadow-inner"
-      bind:this="{desc}"
     >
       <p class="text-gray-800 text-sm text-center">{digimon.description}</p>
     </div>
@@ -74,12 +58,12 @@ $: if (desc) {
     <SupportCard support="{support}" inner />
 
     <StatsCard stats="{digimon.stats}"/>
-
-    <div class="space-y-2">
-    {#each skills as skill, i}
-      <SkillCard skill="{skill}" level="{digimon.learns[i].level}"/>
-    {/each}
-    </div>
-
   </div>
+{:else if tab === 'Skills'}
+  <div class="space-y-2">
+  {#each skills as skill, i}
+    <SkillCard skill="{skill}" level="{digimon.learns[i].level}"/>
+  {/each}
+  </div>
+{/if}
 </Page>
