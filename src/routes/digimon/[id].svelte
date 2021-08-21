@@ -53,20 +53,20 @@ $: {
     <DigiRow digimon="{digimon}"/>
   </svelte:fragment>
 
-  <div>
+  <div class="space-y-6">
 
     <SupportCard support="{support}"/>
     <div
-      class="shadow-md bg-white rounded-md mt-6 p-4"
+      class="shadow-md bg-white rounded-md p-4"
     >
       <p class="rounded-md bg-gray-200 text-gray-800 p-4 shadow-inner">{digimon.description}</p>
     </div>
 
-    <div class="mt-8">
+    <div class="">
       <StatsCard stats="{digimon.stats}"/>
     </div>
 
-    <div class="mt-8 space-y-2">
+    <div class="space-y-2">
     {#each skills as skill, i}
       <SkillCard skill="{skill}" level="{digimon.learns[i].level}"/>
     {/each}
