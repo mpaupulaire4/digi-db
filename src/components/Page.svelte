@@ -5,8 +5,8 @@
   </div>
 </header>
 {/if}
-<main class="overflow-y-auto bg-gray-200 h-full">
-  <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+<main class="overflow-y-auto bg-gray-200 flex-1">
+  <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 h-full w-full">
     <slot></slot>
   </div>
 </main>

@@ -111,7 +111,7 @@ setContext('title',  title)
         {#each links as link}
         <a
           on:click="{() => menuOpen = false}"
-          href="{link.href}"
+          href="/digi-db{link.href}"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium {cx({
             "bg-gray-900 text-white": $page.path === link.href
           })}"

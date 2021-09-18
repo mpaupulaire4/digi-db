@@ -45,26 +45,41 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
     class="flex-1"
   >
     <DigiRow digimon="{digimon}"/>
-    <Tabs tabs="{['Skills', 'Details', 'Evolution']}" class="mt-2 -mb-2" bind:value="{tab}"/>
+    <Tabs tabs="{['Skills', 'Details', 'Evolve', 'De-Evolve']}" class="mt-2 -mb-2" bind:value="{tab}"/>
   </div>
 
-  <div class="slider w-full overflow-x-hidden">
-    <div class="space-y-4">
-      <div
-        class="bg-white rounded-md p-4 shadow-inner"
-      >
-        <p class="text-gray-800 text-sm text-center">{digimon.description}</p>
+  <div class="slider w-full h-full">
+    <div class="slides w-full h-full space-x-5">
+      <div class="space-y-2 h-full" id="skills">
+      {#each skills as skill, i}
+        <SkillCard skill="{skill}" level="{digimon.learns[i].level}"/>
+      {/each}
       </div>
 
-      <SupportCard support="{support}" inner />
+      <div class="space-y-4 h-full" id="details">
+        <div
+          class="bg-white rounded-md p-4 shadow-inner"
+        >
+          <p class="text-gray-800 text-sm text-center">{digimon.description}</p>
+        </div>
 
-      <StatsCard stats="{digimon.stats}"/>
-    </div>
+        <SupportCard support="{support}" inner />
 
-    <div class="space-y-2">
-    {#each skills as skill, i}
-      <SkillCard skill="{skill}" level="{digimon.learns[i].level}"/>
-    {/each}
+        <StatsCard stats="{digimon.stats}"/>
+      </div>
+
+      <div class="space-y-4" id="evolve">
+      {#each digivolve_to as digimon}
+        <DigiRow {digimon}/>
+      {/each}
+      </div>
+
+      <div class="space-y-4" id="de-evolve">
+      {#each digivolve_from as digimon}
+        <DigiRow {digimon}/>
+      {/each}
+      </div>
+
     </div>
   </div>
 </Page>
@@ -75,110 +90,33 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
 }
 .slides {
   display: flex;
-
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-
-
-
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-
-  /*
-  scroll-snap-points-x: repeat(300px);
-  scroll-snap-type: mandatory;
-  */
 }
 .slides::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  display: none;
+  /* width: 10px; */
+  /* height: 10px; */
 }
 .slides::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 10px;
+  display: none;
+  /* background: black; */
+  /* border-radius: 10px; */
 }
 .slides::-webkit-scrollbar-track {
-  background: transparent;
+  display: none;
+  /* background: transparent; */
 }
+
 .slides > div {
   scroll-snap-align: start;
   flex-shrink: 0;
-  width: 300px;
-  height: 300px;
-  margin-right: 50px;
-  border-radius: 10px;
-  background: #eee;
-  transform-origin: center center;
-  transform: scale(1);
-  transition: transform 0.5s;
-  position: relative;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 100px;
-}
-.slides > div:target {
-/*   transform: scale(0.8); */
-}
-.author-info {
-  background: rgba(0, 0, 0, 0.75);
-  color: white;
-  padding: 0.75rem;
-  text-align: center;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  margin: 0;
-}
-.author-info a {
-  color: white;
-}
-img {
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
+  max-width: 100%;
   width: 100%;
   height: 100%;
+  overflow-y: auto;
 }
 
-.slider > a {
-  display: inline-flex;
-  width: 1.5rem;
-  height: 1.5rem;
-  background: white;
-  text-decoration: none;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  margin: 0 0 0.5rem 0;
-  position: relative;
-}
-.slider > a:active {
-  top: 1px;
-}
-.slider > a:focus {
-  background: #000;
-}
-
-/* Don't need button navigation */
-@supports (scroll-snap-type) {
-  .slider > a {
-    display: none;
-  }
-}
-
-html, body {
-  height: 100%;
-  overflow: hidden;
-}
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to bottom, #74ABE2, #5563DE);
-  font-family: 'Ropa Sans', sans-serif;
-}
 </style>
