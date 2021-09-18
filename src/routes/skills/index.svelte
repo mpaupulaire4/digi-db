@@ -99,11 +99,9 @@ function clear() {
     </ul>
     {/if}
   </div>
-  <div>
-    <div role="list" class="space-y-2">
-    {#each filtered_skills as skill}
-      <SkillCard skill="{skill}"/>
-    {/each}
-    </div>
+  <div class="pb-4 space-y-2">
+  {#each filtered_skills as skill}
+    <SkillCard skill="{skill}"/>
+  {/each}
   </div>
 </Page>

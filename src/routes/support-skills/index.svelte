@@ -22,13 +22,11 @@ $: filtered_skills = !search ? queried_skills : queried_skills.filter(
       bind:value="{search}"
     />
   </div>
-  <div>
-    <div role="list" class="space-y-2">
-    {#each filtered_skills as skill}
-      <SupportCard support="{skill}"/>
-    {:else}
+  <div role="list" class="space-y-2 pb-4">
+  {#each filtered_skills as skill}
+    <SupportCard support="{skill}"/>
+  {:else}
     no match
-    {/each}
-    </div>
+  {/each}
   </div>
 </Page>

@@ -11,11 +11,12 @@ import SkillCard from '../../components/SkillCard.svelte'
 import Tabs from '../../components/Tabs.svelte'
 import { DigimonStore, SkillStore, SupportStore } from '$lib/Data/Database'
 
-let id = parseInt($page.params.id);
 let tab = 'Details'
+let tabs = ['Skills', 'Details']
 
 const title = getContext('title')
 
+$: id = parseInt($page.params.id);
 $: digimon = DigimonStore.get(id)
 
 $: skills = digimon.learns.map(({ move_id }) => {
@@ -31,6 +32,11 @@ $: digivolve_from = DigimonStore.where({
 })
 
 $: support = SupportStore.get(digimon.support_id)
+// $: {
+//   if (digivolve_to.length) {
+//     tabs = [tabs]
+//   }
+// }
 
 $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
 
@@ -44,7 +50,7 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
     slot="header"
     class="flex-1"
   >
-    <DigiRow digimon="{digimon}"/>
+    <DigiRow {digimon} />
     <Tabs tabs="{['Skills', 'Details', 'Evolve', 'De-Evolve']}" class="mt-2 -mb-2" bind:value="{tab}"/>
   </div>
 
@@ -56,7 +62,7 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
       {/each}
       </div>
 
-      <div class="space-y-4 h-full" id="details">
+      <div class="space-y-4 h-full pb-4" id="details">
         <div
           class="bg-white rounded-md p-4 shadow-inner"
         >
@@ -68,15 +74,19 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
         <StatsCard stats="{digimon.stats}"/>
       </div>
 
-      <div class="space-y-4" id="evolve">
+      <div class="space-y-4 pb-4" id="evolve">
       {#each digivolve_to as digimon}
-        <DigiRow {digimon}/>
+        <a href="/digi-db/digimon/{digimon.id}" class="block">
+          <DigiRow {digimon}/>
+        </a>
       {/each}
       </div>
 
-      <div class="space-y-4" id="de-evolve">
+      <div class="space-y-4 pb-4" id="de-evolve">
       {#each digivolve_from as digimon}
-        <DigiRow {digimon}/>
+        <a href="/digi-db/digimon/{digimon.id}" class="block">
+          <DigiRow {digimon}/>
+        </a>
       {/each}
       </div>
 
