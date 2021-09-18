@@ -133,7 +133,7 @@ function clear() {
     {#each filtered_digimon as digimon}
     <a
       class="inline-block m-2 rounded-md"
-      href="/digimon/{digimon.id}"
+      href="/digi-db/digimon/{digimon.id}"
       transition:scale
     >
       <DigiCard digimon="{digimon}"/>

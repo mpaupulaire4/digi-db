@@ -1,15 +1,14 @@
-export interface Node<K, V> {
-  prev?: Node<K, V>;
-  next?: Node<K, V>;
+export interface BNode<K, V> {
+  prev?: BNode<K, V>;
+  next?: BNode<K, V>;
 
   keys: K[]
   values: V[]
-  nodes?: Array<Node<K, V>>
-
+  nodes?: Array<BNode<K, V>>
 }
 
 export function indexOf<K>(
-  node: Node<K, any>,
+  node: BNode<K, any>,
   key: K,
   failXor: number,
   cmp: (a: K, b: K) => number
@@ -27,7 +26,7 @@ export function indexOf<K>(
 }
 
 export function set<K, V>(
-  node: Node<K, V>,
+  node: BNode<K, V>,
   key: K,
   value: V,
   i: number
@@ -42,9 +41,9 @@ export function set<K, V>(
   }
 }
 
-export function split<K, V>(node: Node<K, V>): [K, V, Node<K, V>] {
+export function split<K, V>(node: BNode<K, V>): [K, V, BNode<K, V>] {
   const mov = node.keys.length >> 1,
-  newR: Node<K, V> = {
+  newR: BNode<K, V> = {
     keys: node.keys.splice(mov + 1),
     values: node.values.splice(mov + 1),
     nodes: node.nodes && node.nodes.splice(mov + 1)
@@ -57,10 +56,10 @@ export function split<K, V>(node: Node<K, V>): [K, V, Node<K, V>] {
 }
 
 export function merge<K, V>(
-  left: Node<K, V>,
+  left: BNode<K, V>,
   key: K,
   val: V,
-  right: Node<K, V>
+  right: BNode<K, V>
 ) {
   left.keys = left.keys.concat(key, right.keys)
   left.values = left.values.concat(val, right.values)

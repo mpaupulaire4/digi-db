@@ -1,10 +1,11 @@
-import { Node, indexOf, split, set, merge } from "./Node";
+import type { BNode } from "./Node";
+import { indexOf, split, set, merge } from "./Node";
 
 function simpleComparator<T>(a:T, b: T) {
   return a > b ? 1 : a < b ? -1 : 0;
 }
 export class BTree<K, V> {
-  private root: Node<K,V>
+  private root: BNode<K,V>
   private maxNum: number
   private minNum: number
 
@@ -30,7 +31,7 @@ export class BTree<K, V> {
   readonly set = (key: K, val: V) => {
     const stack: {
       i: number,
-      n: Node<K, V>
+      n: BNode<K, V>
     }[] = [];
     let node = this.root;
     let i: number = indexOf(node, key, -1, this.cmp)
@@ -98,11 +99,11 @@ export class BTree<K, V> {
   forRange(low: K | undefined, high: K | undefined, cb: (v: V) => void): void {
     const stack: {
       i: number,
-      n: Node<K, V>
+      n: BNode<K, V>
     }[] = [];
     low = low === undefined ? this.minKey : low
     high = high === undefined ? this.maxKey : high
-    let node: Node<K, V> | undefined = this.root;
+    let node: BNode<K, V> | undefined = this.root;
     let i: number = indexOf<K>(node, low, -1, this.cmp)
     while (i < 0 && node.nodes) {
       const j = ~i
@@ -149,7 +150,7 @@ export class BTree<K, V> {
   readonly delete = (key: K) => {
     const stack: {
       i: number,
-      n: Node<K, V>
+      n: BNode<K, V>
     }[] = [];
     let node = this.root,
     i: number = indexOf(node, key, -1, this.cmp);
@@ -187,13 +188,13 @@ export class BTree<K, V> {
     }
     this.size--;
 
-    // Node still valid: done
+    // BNode still valid: done
     if (node === this.root || node.keys.length >= this.minNum) return true;
     // rebalance if not enough keys in leaf
     this.rebalance(node, stack)
   };
 
-  private rebalance(node: Node<K, V>, stack: { n: Node<K, V>, i: number }[]) { // left sibling steal
+  private rebalance(node: BNode<K, V>, stack: { n: BNode<K, V>, i: number }[]) { // left sibling steal
     do {
       const par = stack.pop()!;
 

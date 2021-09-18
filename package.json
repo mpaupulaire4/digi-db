@@ -11,16 +11,15 @@
     "format": "prettier --write --plugin-search-dir=. ."
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^1.0.0-next.15",
+    "@sveltejs/adapter-static": "next",
     "@sveltejs/kit": "next",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
-    "autoprefixer": "latest",
+    "autoprefixer": "^10.3.4",
     "classnames": "^2.3.1",
     "postcss": "latest",
     "prettier": "~2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
-    "sorted-btree": "^1.5.0",
     "svelte": "^3.34.0",
     "svelte-check": "^2.0.0",
     "svelte-preprocess": "^4.0.0",
