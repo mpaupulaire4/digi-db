@@ -9,7 +9,7 @@
     wind: 'text-wind',
     earth: 'text-earth',
     electric: 'text-electric',
-    none: 'text-white',
+    none: 'text-gray-300',
   }
 </script>
 
