@@ -12,7 +12,7 @@ import Tabs from '../../components/Tabs.svelte'
 import { DigimonStore, SkillStore, SupportStore } from '$lib/Data/Database'
 
 let tab = 'Details'
-let tabs = ['Skills', 'Details']
+let tabs = []
 
 const title = getContext('title')
 
@@ -32,11 +32,15 @@ $: digivolve_from = DigimonStore.where({
 })
 
 $: support = SupportStore.get(digimon.support_id)
-// $: {
-//   if (digivolve_to.length) {
-//     tabs = [tabs]
-//   }
-// }
+$: {
+  tabs = ['Details', 'Skills']
+  if (digivolve_to.length) {
+    tabs.push('Evolve')
+  }
+  if (digivolve_from.length) {
+    tabs.push('De-Evolve')
+  }
+}
 
 $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
 
@@ -51,29 +55,29 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
     class="flex-1"
   >
     <DigiRow {digimon} />
-    <Tabs tabs="{['Skills', 'Details', 'Evolve', 'De-Evolve']}" class="mt-2 -mb-2" bind:value="{tab}"/>
+    <Tabs tabs="{tabs}" class="mt-2 -mb-2" bind:value="{tab}"/>
   </div>
 
   <div class="slider w-full h-full">
     <div class="slides w-full h-full space-x-5">
-      <div class="space-y-2 h-full" id="skills">
-      {#each skills as skill, i}
-        <SkillCard skill="{skill}" level="{digimon.learns[i].level}"/>
-      {/each}
-      </div>
 
       <div class="space-y-4 h-full pb-4" id="details">
+        <SupportCard support="{support}" inner />
+
+        <StatsCard stats="{digimon.stats}"/>
         <div
           class="bg-white rounded-md p-4 shadow-inner"
         >
           <p class="text-gray-800 text-sm text-center">{digimon.description}</p>
         </div>
-
-        <SupportCard support="{support}" inner />
-
-        <StatsCard stats="{digimon.stats}"/>
       </div>
 
+      <div class="space-y-2 h-full" id="skills">
+      {#each skills as skill, i}
+        <SkillCard skill="{skill}" level="{digimon.learns[i].level}"/>
+      {/each}
+      </div>
+    {#if digivolve_to.length}
       <div class="space-y-4 pb-4" id="evolve">
       {#each digivolve_to as digimon}
         <a href="/digi-db/digimon/{digimon.id}" class="block">
@@ -81,7 +85,8 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
         </a>
       {/each}
       </div>
-
+    {/if}
+    {#if digivolve_from.length}
       <div class="space-y-4 pb-4" id="de-evolve">
       {#each digivolve_from as digimon}
         <a href="/digi-db/digimon/{digimon.id}" class="block">
@@ -89,6 +94,7 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
         </a>
       {/each}
       </div>
+    {/if}
 
     </div>
   </div>
