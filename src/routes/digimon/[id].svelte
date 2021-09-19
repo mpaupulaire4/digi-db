@@ -1,6 +1,6 @@
 <script lang="ts">
 import { fade } from 'svelte/transition'
-import { getContext } from 'svelte'
+import { getContext, onMount } from 'svelte'
 import { page } from '$app/stores';
 import DigiCard from '../../components/DigiCard.svelte'
 import Page from '../../components/Page.svelte'
@@ -13,11 +13,19 @@ import { DigimonStore, SkillStore, SupportStore } from '$lib/Data/Database'
 
 let tab = 'Details'
 let tabs = []
+let mounted = false
 
 const title = getContext('title')
 
+onMount(() => mounted = true)
+
 $: id = parseInt($page.params.id);
 $: digimon = DigimonStore.get(id)
+
+$: if (mounted && id) {
+  document.getElementById(location.hash.replace('#', '') || 'Details')?.scrollIntoView()
+};
+
 
 $: skills = digimon.learns.map(({ move_id }) => {
   return SkillStore.get(move_id)

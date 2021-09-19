@@ -6,6 +6,10 @@
   export {
     classname as class
   }
+
+  function click(tab) {
+    value = tab
+  }
 </script>
 
 
@@ -15,8 +19,8 @@
     {#each tabs as tab}
     <a
       href="#{tab}"
-      on:click="{() => value = tab}"
-      class="{tab !== value ? 'text-gray-500 hover:text-gray-700' : 'bg-indigo-100 text-indigo-700'} px-3 py-2 font-medium text-sm rounded-md"
+      on:click="{() => click(tab)}"
+      class="{tab !== value ? 'text-gray-500 hover:text-gray-700' : 'bg-indigo-100 text-indigo-700'} px-3 py-2 font-medium text-sm rounded-md transition-colors duration-300"
     >
       {tab}
     </a>
