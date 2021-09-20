@@ -23,9 +23,12 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
-      # Build for production
+      - name: Install
+        run: yarn install
+
       - name: Build
         run: yarn build
+
       - name: Init new repo in build and commit generated files
         run: |
           cd build
