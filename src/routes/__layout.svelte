@@ -23,7 +23,7 @@ const links = [
   },
 ]
 
-const title = writable('test')
+const title = writable('DigiDB')
 setContext('title',  title)
 
 </script>

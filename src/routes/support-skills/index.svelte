@@ -1,6 +1,6 @@
 <script lang="ts">
 import { scale, slide } from 'svelte/transition'
-import { flip } from 'svelte/animate'
+import { getContext } from 'svelte'
 
 import { SupportStore } from '$lib/Data/Database'
 
@@ -17,8 +17,13 @@ const queried_skills = SupportStore.where()
 $: filtered_skills = !search ? queried_skills : queried_skills.filter(
   d => d.name.toLowerCase().includes(search.toLowerCase()) || d.description.toLowerCase().includes(search.toLowerCase())
 )
-
+getContext('title').set('Support Skills')
 </script>
+
+<svelte:head>
+  <title>DigiDB | Support Skills</title>
+</svelte:head>
+
 <Page>
   <div slot="header" class="flex-1">
     <SearchFilter

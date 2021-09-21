@@ -1,6 +1,6 @@
 <script lang="ts">
 import { scale, slide } from 'svelte/transition'
-import { flip } from 'svelte/animate'
+import { getContext } from 'svelte'
 
 import { DigimonStore } from '$lib/Data/Database'
 
@@ -18,6 +18,8 @@ let search = ''
 let type_filter: Set<string> = new Set();
 let attribute_filter: Set<string> = new Set();
 let stage_filter: Set<string> = new Set();
+
+getContext('title').set('Digimon')
 
 $: query = get_query(attribute_filter, type_filter, stage_filter)
 
@@ -65,6 +67,9 @@ function clear() {
 }
 
 </script>
+<svelte:head>
+  <title>DigiDB | Digimon</title>
+</svelte:head>
 <Page>
   <div slot="header" class="flex-1">
     <SearchFilter

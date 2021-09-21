@@ -1,6 +1,6 @@
 <script lang="ts">
 import { scale, slide } from 'svelte/transition'
-import { flip } from 'svelte/animate'
+import { getContext } from 'svelte'
 
 import { SkillStore } from '$lib/Data/Database'
 
@@ -53,7 +53,11 @@ function clear() {
   type_filter = type_filter
 }
 
+getContext('title').set('Skills')
 </script>
+<svelte:head>
+  <title>DigiDB | Skills </title>
+</svelte:head>
 <Page>
   <div slot="header" class="flex-1">
     <SearchFilter

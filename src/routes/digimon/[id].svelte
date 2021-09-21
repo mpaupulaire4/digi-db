@@ -55,7 +55,7 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
 
 </script>
 <svelte:head>
-  <title>{digimon.name}</title>
+  <title>DigiDB | {digimon.name}</title>
 </svelte:head>
 <Page>
   <div
@@ -69,7 +69,7 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
   <div class="slider w-full h-full">
     <div class="slides w-full h-full space-x-5">
 
-      <div class="space-y-4 h-full pb-4" id="Details">
+      <div class="space-y-4 h-full py-4" id="Details">
         <SupportCard support="{support}" inner />
 
         <StatsCard stats="{digimon.stats}"/>
@@ -80,13 +80,13 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
         </div>
       </div>
 
-      <div class="space-y-2 h-full" id="Skills">
+      <div class="space-y-2 h-full py-4" id="Skills">
       {#each skills as skill, i}
         <SkillCard skill="{skill}" level="{digimon.learns[i].level}"/>
       {/each}
       </div>
     {#if digivolve_to.length}
-      <div class="space-y-4 pb-4" id="Evolve">
+      <div class="space-y-4 py-4" id="Evolve">
       {#each digivolve_to as digimon}
         <a href="/digi-db/digimon/{digimon.id}" class="block">
           <DigiRow {digimon} conditions />
@@ -95,7 +95,7 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
       </div>
     {/if}
     {#if digivolve_from.length}
-      <div class="space-y-4 pb-4" id="De-Evolve">
+      <div class="space-y-4 py-4" id="De-Evolve">
       {#each digivolve_from as digimon}
         <a href="/digi-db/digimon/{digimon.id}" class="block">
           <DigiRow {digimon}/>
