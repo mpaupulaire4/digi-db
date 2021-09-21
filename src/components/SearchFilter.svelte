@@ -8,6 +8,7 @@
   export let placeholder = 'Search'
   export let active = false
   export let clearable = false
+  export let filters = true
 
   const emit = createEventDispatcher()
 
@@ -38,7 +39,7 @@
           block
           w-full
           rounded-none
-          rounded-l-md
+          {filters ? 'rounded-l-md' : 'rounded-md'}
           px-10
           sm:text-sm
           border-gray-300
@@ -56,6 +57,7 @@
       </div>
       {/if}
     </div>
+  {#if filters}
     <button
       on:click="{() => emit('click')}"
       class="
@@ -86,5 +88,6 @@
       </svg>
       <span class="sr-only">Filters</span>
     </button>
+  {/if}
   </div>
 </div>

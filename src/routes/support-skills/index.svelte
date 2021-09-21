@@ -8,7 +8,6 @@ import SupportCard from '../../components/SupportCard.svelte'
 import Page from '../../components/Page.svelte'
 import SearchFilter from '../../components/SearchFilter.svelte'
 import ButtonSelect from '../../components/ButtonSelect.svelte'
-import VirtualList from '../../components/VirtualList.svelte'
 import List from '../../components/Virtual.svelte'
 
 let search = ''
@@ -23,16 +22,17 @@ $: filtered_skills = !search ? queried_skills : queried_skills.filter(
 <Page>
   <div slot="header" class="flex-1">
     <SearchFilter
+      filters="{false}"
       bind:value="{search}"
     />
   </div>
-  <div role="list" class="overflow-y-auto h-full">
-  <List items="{filtered_skills}" let:item initialRender="{11}">
-    <SupportCard support="{item}" />
-  </List>
-  <!-- {#each filtered_skills as skill}
+  <div role="list" class="overflow-y-auto h-full pt-4">
+  {#each filtered_skills as item}
+    <div class="pb-2">
+      <SupportCard support="{item}" />
+    </div>
   {:else}
     no match
-  {/each} -->
+  {/each}
   </div>
 </Page>

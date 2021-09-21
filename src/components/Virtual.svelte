@@ -4,10 +4,10 @@
   export let items;
   export let initialRender = 1
   export let buffer = 20
+  export let itemHeight = -1;
 
   let scrollTop = 0;
   let containerHeight = 0;
-  let itemHeight = 1;
   let self;
 
 
@@ -35,8 +35,10 @@
   onMount(() => {
     reqID = requestAnimationFrame(poll);
     containerHeight = self?.parentNode?.clientHeight;
-    itemHeight = self?.firstChild?.clientHeight;
     scrollTop = self?.parentNode?.scrollTop;
+    if (itemHeight < 0) {
+      itemHeight = self?.firstChild?.clientHeight;
+    }
     return () => {
       cancelAnimationFrame(reqID);
     }
