@@ -29,6 +29,7 @@ module.exports = {
     extend: {
       ringColor: ['hover'],
       borderRadius: ['first', 'last'],
+      margin: ['first', 'last'],
     },
   },
   plugins: [

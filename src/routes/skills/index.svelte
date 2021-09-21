@@ -1,11 +1,14 @@
 <script lang="ts">
 import { scale, slide } from 'svelte/transition'
 import { flip } from 'svelte/animate'
+
+import { SkillStore } from '$lib/Data/Database'
+
 import SkillCard from '../../components/SkillCard.svelte'
 import Page from '../../components/Page.svelte'
 import SearchFilter from '../../components/SearchFilter.svelte'
 import ButtonSelect from '../../components/ButtonSelect.svelte'
-import { SkillStore } from '$lib/Data/Database'
+import List from '../../components/Virtual.svelte'
 
 let open = false
 
@@ -99,9 +102,11 @@ function clear() {
     </ul>
     {/if}
   </div>
-  <div class="pb-4 space-y-2">
-  {#each filtered_skills as skill}
-    <SkillCard skill="{skill}"/>
-  {/each}
+  <div class="py-4 h-full overflow-y-auto">
+    <List items="{filtered_skills}" let:item initialRender="{25}">
+      <div class="pb-2">
+        <SkillCard skill="{item}"/>
+      <div/>
+    </List>
   </div>
 </Page>

@@ -1,11 +1,14 @@
 <script lang="ts">
 import { scale, slide } from 'svelte/transition'
 import { flip } from 'svelte/animate'
-import DigiCard from '../components/DigiCard.svelte'
+
+import { DigimonStore } from '$lib/Data/Database'
+
+import DigiRow from '../components/DigiRow.svelte'
 import Page from '../components/Page.svelte'
 import SearchFilter from '../components/SearchFilter.svelte'
 import ButtonSelect from '../components/ButtonSelect.svelte'
-import { DigimonStore } from '$lib/Data/Database'
+import List from '../components/Virtual.svelte'
 
 let digimon = []
 let open = false
@@ -129,15 +132,14 @@ function clear() {
     </ul>
     {/if}
   </div>
-  <div>
-    {#each filtered_digimon as digimon}
-    <a
-      class="inline-block m-2 rounded-md"
-      href="/digi-db/digimon/{digimon.id}"
-      transition:scale
-    >
-      <DigiCard digimon="{digimon}"/>
-    </a>
-    {/each}
+  <div class="py-4 h-full overflow-y-auto">
+    <List items="{filtered_digimon}" initialRender="{25}" let:item="{digimon}">
+      <a
+        class="block pb-2"
+        href="/digi-db/digimon/{digimon.id}"
+      >
+        <DigiRow digimon="{digimon}"/>
+      </a>
+    </List>
   </div>
 </Page>

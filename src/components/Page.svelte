@@ -6,7 +6,7 @@
 </header>
 {/if}
 <main class="overflow-y-auto bg-gray-200 flex-1">
-  <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8 h-full w-full">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full w-full">
     <slot></slot>
   </div>
 </main>
