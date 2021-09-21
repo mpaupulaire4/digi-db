@@ -9,7 +9,7 @@ import Page from '../../components/Page.svelte'
 import SearchFilter from '../../components/SearchFilter.svelte'
 import ButtonSelect from '../../components/ButtonSelect.svelte'
 import VirtualList from '../../components/VirtualList.svelte'
-import List from '../../components/List.svelte'
+import List from '../../components/Virtual.svelte'
 
 let search = ''
 
@@ -26,8 +26,10 @@ $: filtered_skills = !search ? queried_skills : queried_skills.filter(
       bind:value="{search}"
     />
   </div>
-  <div role="list" class="overflow-hidden h-full">
-  <List />
+  <div role="list" class="overflow-y-auto h-full">
+  <List items="{filtered_skills}" let:item initialRender="{11}">
+    <SupportCard support="{item}" />
+  </List>
   <!-- {#each filtered_skills as skill}
   {:else}
     no match

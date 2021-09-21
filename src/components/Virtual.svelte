@@ -3,11 +3,11 @@
 
   export let items;
   export let initialRender = 1
-  export let buffer = 1
+  export let buffer = 20
 
   let scrollTop = 0;
   let containerHeight = 0;
-  let itemHeight = 0;
+  let itemHeight = 1;
   let self;
 
 
@@ -15,23 +15,18 @@
   $: numVisible = Math.ceil(containerHeight / itemHeight) + 2 * buffer
   $: start = Math.max(Math.floor(scrollTop / itemHeight) - buffer, 0)
   $: end = start + numVisible
-  $: slice = items.slice(start, end)
+  $: list = items.slice(start, end)
 
   $: top = start * itemHeight
-
-  $: console.log(numVisible, end);
 
   let reqID;
   function poll() {
     if (self?.parentNode?.scrollTop !== scrollTop) {
       scrollTop = self?.parentNode?.scrollTop;
     }
+
     if (self?.parentNode?.clientHeight !== containerHeight) {
       containerHeight = self?.parentNode?.clientHeight;
-    }
-
-    if (self?.firstChild?.clientHeight !== itemHeight) {
-      itemHeight = self?.firstChild?.clientHeight
     }
 
     reqID = requestAnimationFrame(poll);
@@ -49,7 +44,7 @@
 </script>
 <ul bind:this="{self}" class="list" style="height: {listHeight}px">
 {#if self}
-{#each slice as item, i}
+{#each list as item}
   <li class="list-item" style="top: {top}px">
     <slot item="{item}"/>
   </li>
