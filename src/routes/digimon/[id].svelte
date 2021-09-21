@@ -1,7 +1,10 @@
 <script lang="ts">
 import { fade } from 'svelte/transition'
 import { getContext, onMount } from 'svelte'
+
 import { page } from '$app/stores';
+import { DigimonStore, SkillStore, SupportStore } from '$lib/Data/Database'
+
 import DigiCard from '../../components/DigiCard.svelte'
 import Page from '../../components/Page.svelte'
 import StatsCard from '../../components/StatsCard.svelte'
@@ -9,7 +12,6 @@ import SupportCard from '../../components/SupportCard.svelte'
 import DigiRow from '../../components/DigiRow.svelte'
 import SkillCard from '../../components/SkillCard.svelte'
 import Tabs from '../../components/Tabs.svelte'
-import { DigimonStore, SkillStore, SupportStore } from '$lib/Data/Database'
 
 let tab = 'Details'
 let tabs = []
