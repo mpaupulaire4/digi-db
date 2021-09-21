@@ -17,14 +17,18 @@ let mounted = false
 
 const title = getContext('title')
 
-onMount(() => mounted = true)
+onMount(() => {
+  mounted = true
+})
 
-$: id = parseInt($page.params.id);
+$: id = parse($page.params.id);
+function parse(params:string) {
+  tab = 'Details'
+  return parseInt(params)
+}
 $: digimon = DigimonStore.get(id)
 
-$: if (mounted && id) {
-  document.getElementById(location.hash.replace('#', '') || 'Details')?.scrollIntoView()
-};
+$: mounted && document.getElementById(tab)?.scrollIntoView()
 
 
 $: skills = digimon.learns.map(({ move_id }) => {
@@ -51,7 +55,6 @@ $: {
 }
 
 $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
-
 
 </script>
 <svelte:head>
