@@ -11,7 +11,7 @@
     "format": "prettier --write --plugin-search-dir=. ."
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "next",
+    "@sveltejs/adapter-static": "^1.0.0-next.19",
     "@sveltejs/kit": "^1.0.0-next.170",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
