@@ -10,7 +10,6 @@ import SearchFilter from '../components/SearchFilter.svelte'
 import ButtonSelect from '../components/ButtonSelect.svelte'
 import List from '../components/Virtual.svelte'
 
-let digimon = []
 let open = false
 
 let search = ''
