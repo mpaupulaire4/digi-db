@@ -68,12 +68,10 @@ export const ItemStore = new ObjectStore<Item, number>('items', [
   },
 ], 'id')
 
-export const loaded = Promise.all<any>([
-  ...data.digimon.map((d) => DigimonStore.insert(d as any as Digimon)),
-  ...data.skills.map((d) => SkillStore.insert(d as any as Skill)),
-  ...data.supports.map((d) => SupportStore.insert(d as any as Support)),
-  ...data.areas.map((d) => AreaStore.insert(d as any as Area)),
-  ...data.items.map((d) => ItemStore.insert(d as any as Item)),
-])
+data.digimon.map((d) => DigimonStore.insert(d as any as Digimon))
+data.skills.map((d) => SkillStore.insert(d as any as Skill))
+data.supports.map((d) => SupportStore.insert(d as any as Support))
+data.areas.map((d) => AreaStore.insert(d as any as Area))
+data.items.map((d) => ItemStore.insert(d as any as Item))
 
 export const max_stats = data.max_stats
