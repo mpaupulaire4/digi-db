@@ -1,6 +1,8 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+import defaultTheme  from 'windicss/defaultTheme'
+import { defineConfig }  from 'windicss/helpers'
+import forms  from 'windicss/plugin/forms'
 
-module.exports = {
+export default defineConfig({
   purge: ['./src/app.html', './src/**/*.{svelte,js,ts,css}'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
@@ -25,15 +27,11 @@ module.exports = {
       }
     },
   },
-  variants: {
-    extend: {
-      ringColor: ['hover'],
-      borderRadius: ['first', 'last'],
-      margin: ['first', 'last'],
-    },
+  extract: {
+    include: ['src/**/*.{svelte,html,js,ts}'],
+    exclude: ['node_modules', '.git'],
   },
   plugins: [
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/forms'),
+    forms,
   ],
-}
+})

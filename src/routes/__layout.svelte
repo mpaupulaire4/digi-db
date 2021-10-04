@@ -4,6 +4,8 @@ import { setContext } from "svelte";
 import { writable } from "svelte/store";
 import { slide } from 'svelte/transition';
 import cx from 'classnames'
+import "virtual:windi.css"
+
 import '../index.css'
 
 let menuOpen = false

@@ -13,20 +13,16 @@
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.19",
     "@sveltejs/kit": "^1.0.0-next.170",
-    "@tailwindcss/aspect-ratio": "^0.2.1",
-    "@tailwindcss/forms": "^0.3.3",
-    "autoprefixer": "^10.3.4",
     "classnames": "^2.3.1",
-    "postcss": "latest",
     "prettier": "~2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
     "svelte": "^3.34.0",
     "svelte-check": "^2.0.0",
     "svelte-preprocess": "^4.0.0",
-    "tailwindcss": "^2.2.15",
     "tslib": "^2.0.0",
-    "typescript": "^4.0.0"
+    "typescript": "^4.0.0",
+    "vite-plugin-windicss": "^1.4.9",
+    "windicss": "^3.1.9"
   },
-  "type": "module",
-  "dependencies": {}
+  "type": "module"
 }
