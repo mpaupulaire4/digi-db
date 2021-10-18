@@ -75,7 +75,9 @@ $: title.set(`${digimon.name} - #${digimon.id.toString().padStart(3, '0')}`)
     <div class="slides w-full h-full space-x-5">
 
       <div class="space-y-4 h-full py-4" id="Details">
+      {#if support}
         <SupportCard support="{support}" inner />
+      {/if}
 
         <StatsCard stats="{digimon.stats}"/>
         <div
